@@ -1,16 +1,32 @@
 {
-  "name": "next-portfolio",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "13.4.16",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+	"name": "my-next-app",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "start http://localhost:3000 && next dev",
+		"server": "json-server --watch ./data/db.json --port 4000",
+		"dev-server": "concurrently \"yarn dev\" \"yarn server\"",
+		"build": "next build",
+		"start": "next start",
+		"generate-posts": "cd ./utils && node generatePosts.js 10 overwrite",
+		"add-posts": "cd ./utils && node generatePosts.js 10 append",
+		"clear-posts": "cd ./utils && node generatePosts.js null clear"
+	},
+	"dependencies": {
+		"concurrently": "^8.2.2",
+		"dayjs": "^1.11.10",
+		"next": "14.0.3",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-icons": "^4.12.0"
+	},
+	"devDependencies": {
+		"@ngneat/falso": "^7.1.1",
+		"@tailwindcss/container-queries": "^0.1.1",
+		"@tailwindcss/forms": "^0.5.7",
+		"autoprefixer": "^10.0.1",
+		"postcss": "^8",
+		"tailwind-merge": "^2.1.0",
+		"tailwindcss": "^3.3.0"
+	}
 }
