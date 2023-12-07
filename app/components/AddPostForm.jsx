@@ -1,9 +1,9 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import Button from '@/app/components/ui/Button'
-import { addPost } from '../api/routes'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { addPost } from '../api/routes'
 import { randUser } from '@ngneat/falso'
+import Button from '@/app/components/ui/Button'
 
 const initialFormState = {
 	id: randUser().id,
@@ -29,6 +29,7 @@ const AddPostForm = ({ closeModal }) => {
 	const handleAddPost = async () => {
 		await addPost(postContent)
 		router.refresh()
+		router.push('/')
 		closeModal()
 		resetForm()
 	}

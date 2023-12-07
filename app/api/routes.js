@@ -11,15 +11,15 @@ async function getPosts() {
 	return res.json()
 }
 
-async function deletePost(id) {
+async function getSinglePost(id) {
 	const res = await fetch(`${dataUrl}/${id}`, {
-		method: 'DELETE',
+		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		cache: 'no-cache',
 	})
-	return
+	return res.json()
 }
 
 async function addPost(post) {
@@ -34,4 +34,16 @@ async function addPost(post) {
   return res.json()
 }
 
-export { getPosts, deletePost, addPost }
+async function deletePost(id) {
+	const res = await fetch(`${dataUrl}/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		cache: 'no-cache',
+	})
+	return
+}
+
+
+export { getPosts, getSinglePost, addPost, deletePost }

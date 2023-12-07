@@ -1,10 +1,10 @@
-import PostsList from '@/app/components/PostsList'
+import PostsList from '@/components/PostsList'
 
 export default function Dashboard() {
 	return (
-		<>
-			<div className='mb-4 text-xl font-extrabold uppercase'>Posts</div>
+		<div className='flex flex-col gap-6'>
+			<div className='text-xl font-extrabold uppercase'>Posts</div>
 			<PostsList />
-		</>
+		</div>
 	)
 }

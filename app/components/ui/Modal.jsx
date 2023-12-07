@@ -1,8 +1,14 @@
 import { twMerge } from 'tailwind-merge'
-import Button from '@/app/components/ui/Button'
-import { IoCloseCircleOutline } from 'react-icons/io5'
+import Button from '@/components/ui/Button'
+import { IoCloseCircle } from 'react-icons/io5'
 
-const Modal = ({ modalOpen, closeModal, className, children, ...props }) => {
+export default function Modal({
+	modalOpen,
+	closeModal,
+	className,
+	children,
+	...props
+}) {
 	return (
 		<>
 			{modalOpen && (
@@ -18,7 +24,7 @@ const Modal = ({ modalOpen, closeModal, className, children, ...props }) => {
 						{...props}>
 						{children}
 						<Button
-							label={<IoCloseCircleOutline />}
+							label={<IoCloseCircle />}
 							btnStyle='icon'
 							onClick={closeModal}
 							className='absolute top-0 right-0 m-2 text-white hover:text-yellow-300'
@@ -29,5 +35,3 @@ const Modal = ({ modalOpen, closeModal, className, children, ...props }) => {
 		</>
 	)
 }
-
-export default Modal
