@@ -1,7 +1,10 @@
+import PostsList from '@/app/components/PostsList'
+
 export default function Dashboard() {
 	return (
 		<>
-			<h1>Dashboard</h1>
+			<div className='mb-4 text-xl font-extrabold uppercase'>Posts</div>
+			<PostsList />
 		</>
 	)
 }

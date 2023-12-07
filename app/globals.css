@@ -2,22 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
 	@apply text-gray-500 m-4 bg-stone-100 sm:m-8;
-
-	/* nav section styles */
-	& nav {
-		@apply pb-4 border-b-2 border-gray-400 flex items-center justify-between my-10 mx-auto max-w-7xl;
-		& .nav-brand {
-			@apply text-2xl font-bold uppercase;
-		}
-		& .nav-links {
-			@apply flex items-center gap-6;
-		}
-	}
-
-	/* main section styles */
-	& main {
-		@apply max-w-7xl my-8 mx-auto px-4;
-	}
 }

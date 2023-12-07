@@ -15,8 +15,7 @@ const Button = ({
 				'uppercase px-2 py-1 border w-fit rounded-md flex place-items-center place-content-center place-self-center cursor-pointer transition-all duration-300 hover:shadow-md hover:filter hover:brightness-105',
 				className,
 				btnStyle === 'text' &&
-					'text-sm bg-slate-200 border-slate-400 hover:bg-slate-300 hover:border-slate-500',
-				'text-2xl p-1 border-none rounded-full hover:transform hover:scale-125 hover:shadow-none hover:filter-none',
+					'text-sm bg-slate-200 border-slate-400 hover:bg-slate-400 hover:border-slate-600',
 				btnStyle === 'icon' &&
 					'text-2xl p-1 border-none rounded-full hover:transform hover:scale-125 hover:shadow-none hover:filter-none',
 				props.disabled &&

@@ -18,7 +18,7 @@ function generatePosts(count, clearFile) {
 
 		const randomPost = {
 			id: randomId,
-			date: randomDate.toLocaleString(),
+			date: randomDate,
 			content: randomContent,
 			username: randomUsername,
 			email: randomEmail,
