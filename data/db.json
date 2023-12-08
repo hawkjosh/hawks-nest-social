@@ -1,151 +1,254 @@
 {
   "posts": [
     {
-      "id": "c581e3c9-115f-488e-bf57-0dfc17dd1c56",
-      "date": "2022-11-20T00:25:52.841Z",
-      "content": "We all have problems. The way we solve them is what makes us different.",
-      "username": "Ravi_Begam94",
-      "email": "ravi+begam@me.org"
+      "id": "d11699bc-405e-4a5b-8b8e-8af44fb17dfb",
+      "date": "2023-08-21T21:31:26.891Z",
+      "content": "Listen, whatever makes the movie better. That's the attitude you have to have.",
+      "user": {
+        "id": "f111f8c4-3141-438b-8687-f0f7e5d4d00f",
+        "username": "Koji.Suleiman88",
+        "email": "blessingbauer@verizon.com"
+      }
     },
     {
-      "id": "1bd95826-8a18-4304-8c8d-562a5b0219f7",
-      "date": "2020-07-16T10:55:52.382Z",
-      "content": "It's better for me to play with guys because Rock 'n' Roll has such an aggressive attitude.",
-      "username": "Jane.Singh65",
-      "email": "jane_singh765@aol.info"
+      "id": "bb243256-ec89-439d-a581-960747c43b4b",
+      "date": "2021-02-21T23:48:06.694Z",
+      "content": "'UFO's' attitude toward the subject is very similar to mine. It's not an advocacy its philosophy is more 'I want to believe this, but I want it proved.'",
+      "user": {
+        "id": "9a391a3e-2640-446a-8d21-5159f34f4296",
+        "username": "Susan_Shemesh",
+        "email": "helgi.dudek@mac.info"
+      }
     },
     {
-      "id": "5a40fb8e-036f-40a1-af43-63692d7298ec",
-      "date": "2021-07-06T16:47:39.683Z",
-      "content": "I was always the guy getting kicked out of my classes at school for having an attitude problem.",
-      "username": "Hendrik_Wanjiku",
-      "email": "hendrik+wanjiku@ig.name"
+      "id": "bb0cc894-8eed-4ae9-b443-13cf0d1314a2",
+      "date": "2021-02-27T23:39:34.834Z",
+      "content": "Jazz in itself is not struggling. That is, the music itself is not struggling... It's the attitude that's in trouble. My plays insist that we should not forget or toss away our history.",
+      "user": {
+        "id": "436f8e67-4e82-424c-a4dd-60ac7e6aa463",
+        "username": "Akira.Cherinsuk",
+        "email": "nikitavasileva310@mac.io"
+      }
     },
     {
-      "id": "3e0ff229-84cc-4d26-8795-54d7d0bd1f6c",
-      "date": "2020-04-30T22:23:42.797Z",
-      "content": "The difficulties of life are intended to make us better, not bitter.",
-      "username": "Fatima_Kikuchi70",
-      "email": "fatima+kikuchi@web.io"
+      "id": "7c3bfcfa-fc86-47c8-874c-d68d501d409c",
+      "date": "2021-12-09T16:07:54.939Z",
+      "content": "My father instilled in me the attitude of prevailing. If there's a challenge, go for it. If there's a wall to break down, break it down.",
+      "user": {
+        "id": "bce94364-c5d1-4d13-9e3a-d57af1c57bb2",
+        "username": "Karen.Rathod",
+        "email": "ping.wagner67@aim.org"
+      }
     },
     {
-      "id": "0d750c69-45ce-4a91-b088-3635c7cfc317",
-      "date": "2022-04-21T23:28:37.016Z",
-      "content": "If you're looking for can-do, earthy-crunchy attitude then you've got to go to Wisconsin.",
-      "username": "Wolfgang_Hayashi78",
-      "email": "wolfgang.hayashi@alice.com"
+      "id": "11b43298-c1c9-4b31-b08e-72c2aa0795db",
+      "date": "2020-01-11T15:09:33.879Z",
+      "content": "I always said punk was an attitude. It was never about having a Mohican haircut or wearing a ripped T-shirt. It was all about destruction, and the creative potential within that.",
+      "user": {
+        "id": "436f8e67-4e82-424c-a4dd-60ac7e6aa463",
+        "username": "Akira.Cherinsuk",
+        "email": "nikitavasileva310@mac.io"
+      }
     },
     {
-      "id": "1d6aa584-83a0-480f-a8a9-2898f62f6df0",
-      "date": "2021-11-22T10:58:28.249Z",
-      "content": "Really you just gotta keep chugging along and keep a positive attitude and get through all the problems. You gotta face them, otherwise you don't get through.",
-      "username": "Gita.Dominguez38",
-      "email": "gita-dominguez@rocketmail.info"
+      "id": "63d4b17e-1658-47b0-bb70-1b5626f0937d",
+      "date": "2023-07-31T18:08:07.590Z",
+      "content": "The compulsion to do good is an innate American trait. Only North Americans seem to believe that they always should, may, and actually can choose somebody with whom to share their blessings. Ultimately this attitude leads to bombing people into the acceptance of gifts.",
+      "user": {
+        "id": "bd59547e-7bbe-4bbe-a33e-a50c8701d628",
+        "username": "Bin.Cortes",
+        "email": "denis.yaakv707@home.com"
+      }
     },
     {
-      "id": "0c24d0bf-d365-41ef-94e4-54354d7e792d",
-      "date": "2020-12-19T09:14:10.569Z",
-      "content": "Hollywood's a very weird place. I think there's less of everything except for attitude.",
-      "username": "Dilip_Andreev46",
-      "email": "dilip.andreev344@unaref.com"
+      "id": "1257c019-ef96-4ded-ade0-0d6b6851701f",
+      "date": "2022-09-01T06:01:40.604Z",
+      "content": "A positive attitude causes a chain reaction of positive thoughts, events and outcomes. It is a catalyst and it sparks extraordinary results.",
+      "user": {
+        "id": "bd59547e-7bbe-4bbe-a33e-a50c8701d628",
+        "username": "Bin.Cortes",
+        "email": "denis.yaakv707@home.com"
+      }
     },
     {
-      "id": "d4b3507f-d86d-49a7-8ae2-368b81b5d269",
-      "date": "2022-08-12T07:29:04.520Z",
-      "content": "Nothing. We're all friends and friendly. So when the cameras go down, depending on the mood or the nature of the material we're dealing with, there's usually a kind of a prevailing light attitude that's floating around.",
-      "username": "Haiyan_Fernandez",
-      "email": "haiyan+fernandez567@gmail.net"
+      "id": "a429babf-bea8-4281-9aae-968fc2d627be",
+      "date": "2021-10-22T15:43:57.114Z",
+      "content": "The world is full of musicians who can play great, and you wouldn't cross the road to see them. It's people who have this indefinable attitude that are the good ones.",
+      "user": {
+        "id": "2edc6cd7-d5f6-4117-99a0-ca088cc49e19",
+        "username": "Qing.Marek",
+        "email": "kirill_majewski@optonline.org"
+      }
     },
     {
-      "id": "e4fc2469-90f3-4ee4-9421-b5911f46f9fd",
-      "date": "2021-04-04T23:30:12.300Z",
-      "content": "There were a few teachers who just did not like me because of my face. Once, I was told to stand in the corner until I cheered up. The attitude was, 'Oh, for God's sake, what's the matter with him?' But it's just a natural expression.",
-      "username": "Eva_Jia42",
-      "email": "eva_jia503@outlook.dev"
+      "id": "fea2aae7-5465-4709-88aa-bee31f9ef604",
+      "date": "2022-02-10T11:04:01.787Z",
+      "content": "Letting go is not the end of the world; it is the beginning of a new life.",
+      "user": {
+        "id": "f111f8c4-3141-438b-8687-f0f7e5d4d00f",
+        "username": "Koji.Suleiman88",
+        "email": "blessingbauer@verizon.com"
+      }
     },
     {
-      "id": "eed97c16-b85d-4a13-88cf-d96f372da287",
-      "date": "2022-05-30T06:09:05.936Z",
-      "content": "The attitude is we live and let live. This is actually an amazing change in values in a rather short time and it's an example of freedom from religion.",
-      "username": "Lyudmila_Zwane42",
-      "email": "lyudmilazwane@mail.org"
+      "id": "90f50ced-7b71-431b-8471-0384ad9e230e",
+      "date": "2023-02-07T19:06:33.910Z",
+      "content": "Life is not measured by the breaths we take, but by the moments that take our breath.",
+      "user": {
+        "id": "f111f8c4-3141-438b-8687-f0f7e5d4d00f",
+        "username": "Koji.Suleiman88",
+        "email": "blessingbauer@verizon.com"
+      }
     },
     {
-      "id": "7c6cb554-2367-40a0-9287-25e621542f1b",
-      "date": "2020-07-26T06:34:18.767Z",
-      "content": "We all have problems. The way we solve them is what makes us different.",
-      "username": "Yong.Adhiambo73",
-      "email": "yong.adhiambo@live.net"
+      "id": "754c7dc3-e77f-4a83-a2a1-f8b9e4fc7b8c",
+      "date": "2020-06-01T02:21:12.590Z",
+      "content": "The compulsion to do good is an innate American trait. Only North Americans seem to believe that they always should, may, and actually can choose somebody with whom to share their blessings. Ultimately this attitude leads to bombing people into the acceptance of gifts.",
+      "user": {
+        "id": "d46a9d6c-a95f-458d-8bea-10fe46e89021",
+        "username": "Martin.Nakamura",
+        "email": "steinunnwalters@blueyonder.biz"
+      }
     },
     {
-      "id": "f2521d44-7349-4629-9e52-73b820a39dda",
-      "date": "2020-03-15T08:15:24.746Z",
-      "content": "The last of human freedoms - the ability to chose one's attitude in a given set of circumstances.",
-      "username": "Andri_Koster",
-      "email": "andri.koster@free.biz"
+      "id": "d5d50632-75ec-4a41-b734-be3c36590c3a",
+      "date": "2021-05-14T10:15:49.544Z",
+      "content": "My grandfather was a man, when he talked about freedom, his attitude was really interesting. His view was that you had obligations or you had responsibilities, and when you fulfilled those obligations or responsibilities, that then gave you the liberty to do other things.",
+      "user": {
+        "id": "bd59547e-7bbe-4bbe-a33e-a50c8701d628",
+        "username": "Bin.Cortes",
+        "email": "denis.yaakv707@home.com"
+      }
     },
     {
-      "id": "f66d4435-0989-4e3c-af9e-fe8b375d626a",
-      "date": "2020-06-16T23:57:01.496Z",
-      "content": "My agent says that I'm a 'repeat business guy.' If you hire me to come do a movie, I'll be on time, know all my material, be ready to go, have a good attitude. I'm here to work, so I get hired over and over again by the same producers. If you just be a team player on set you can work so much more often.",
-      "username": "Artur.Begum28",
-      "email": "artur_begum@uol.name"
+      "id": "9f2ed286-7602-4f8f-a282-58d58a419fd3",
+      "date": "2020-10-04T09:43:14.425Z",
+      "content": "I fell in love with Erica Kane the summer before my freshman year of high school. Like all red-blooded teen American boys, I'd come home from water polo practice and eat a box of Entenmann's Pop'Ems donut holes in front of the TV while obsessively fawning over 'All My Children' and Erica, her clothes, and her narcissistic attitude.",
+      "user": {
+        "id": "16e50a0e-54cc-4920-b215-772e1333802d",
+        "username": "Takako.Gonzales",
+        "email": "gita_jia@skynet.biz"
+      }
     },
     {
-      "id": "7fbde846-1786-40b0-977b-183ed7660e1f",
-      "date": "2023-03-30T19:20:48.927Z",
-      "content": "Our attitude towards others determines their attitude towards us.",
-      "username": "Isa_Andreeva23",
-      "email": "isa_andreeva503@bol.org"
+      "id": "5ce794c4-e2be-4af8-a6df-526e354f4bf3",
+      "date": "2020-11-28T01:48:12.895Z",
+      "content": "I think fun is an important part of the entertainment industry, and it should be. Anybody who's not incorporating some of that into their work needs to take a break, go away, and have an attitude adjustment.",
+      "user": {
+        "id": "f111f8c4-3141-438b-8687-f0f7e5d4d00f",
+        "username": "Koji.Suleiman88",
+        "email": "blessingbauer@verizon.com"
+      }
     },
     {
-      "id": "900d26d0-4c3a-4bea-a7a7-638057775557",
-      "date": "2022-10-02T13:18:07.927Z",
-      "content": "I will keep smiling, be positive and never give up! I will give 100 percent each time I play. These are always my goals and my attitude.",
-      "username": "Isaac_De-Graaf",
-      "email": "isaacde-graaf@gmx.org"
+      "id": "f398601d-7b7c-4bc4-b6b7-d725cad51cb3",
+      "date": "2021-12-05T07:32:00.566Z",
+      "content": "He who has health has hope, and he who has hope has everything.",
+      "user": {
+        "id": "2edc6cd7-d5f6-4117-99a0-ca088cc49e19",
+        "username": "Qing.Marek",
+        "email": "kirill_majewski@optonline.org"
+      }
     },
     {
-      "id": "13ec775f-0e5d-4bfd-bbe0-c8bce8cabfb4",
-      "date": "2022-08-08T13:42:34.243Z",
-      "content": "When I go to the clinic next and sit with a tube in my arm and watch the poison go in, I'm in an attitude of abject passivity. It doesn't feel like fighting at all it just feels like submitting.",
-      "username": "Eunice.Smit54",
-      "email": "eunice.smit662@frontiernet.com"
+      "id": "32257d2c-0d5c-4783-b909-689a35c70dad",
+      "date": "2022-05-04T03:32:10.834Z",
+      "content": "My grandfather was a man, when he talked about freedom, his attitude was really interesting. His view was that you had obligations or you had responsibilities, and when you fulfilled those obligations or responsibilities, that then gave you the liberty to do other things.",
+      "user": {
+        "id": "9a391a3e-2640-446a-8d21-5159f34f4296",
+        "username": "Susan_Shemesh",
+        "email": "helgi.dudek@mac.info"
+      }
     },
     {
-      "id": "96a6ccd7-ab3d-419f-a196-f76aad0a99b0",
-      "date": "2023-02-02T04:13:04.328Z",
-      "content": "Attitude is attitude, whether you're a West Coast gangster or East Coast gangster, you know?",
-      "username": "Sani.Willems",
-      "email": "sani.willems483@aliceadsl.info"
+      "id": "d6d93bfd-5833-4515-87e0-cd5fb85cbb91",
+      "date": "2022-08-13T06:41:52.378Z",
+      "content": "I'm a big fan of Courtney Love. I love Hole and I love her acting and I love her attitude. I just hope I never meet her in a dark alley.",
+      "user": {
+        "id": "436f8e67-4e82-424c-a4dd-60ac7e6aa463",
+        "username": "Akira.Cherinsuk",
+        "email": "nikitavasileva310@mac.io"
+      }
     },
     {
-      "id": "a705835c-5355-4c67-96b9-2ea1cf95f9ed",
-      "date": "2020-09-02T08:07:42.739Z",
-      "content": "If you have a positive attitude and constantly strive to give your best effort, eventually you will overcome your immediate problems and find you are ready for greater challenges.",
-      "username": "Rut.Sombun57",
-      "email": "rut.sombun@skynet.name"
+      "id": "5b701b9f-ce38-4029-9be1-398af7e9824c",
+      "date": "2021-10-22T03:07:26.686Z",
+      "content": "Tommie Aaron taught me how to have a good attitude, to be easy going and not get uptight.",
+      "user": {
+        "id": "f111f8c4-3141-438b-8687-f0f7e5d4d00f",
+        "username": "Koji.Suleiman88",
+        "email": "blessingbauer@verizon.com"
+      }
     },
     {
-      "id": "e8f90d2d-5424-46bc-a00b-5080cf48fab2",
-      "date": "2022-01-14T03:17:49.515Z",
-      "content": "Not to discriminate every moment some passionate attitude in those about us, and in the very brilliancy of their gifts some tragic dividing on their ways, is, on this short day of frost and sun, to sleep before evening.",
-      "username": "Yan.Bala",
-      "email": "yan-bala955@web.name"
+      "id": "d5349453-94ac-4932-aa67-e5f594af2ece",
+      "date": "2023-09-13T10:41:41.512Z",
+      "content": "A positive attitude is something everyone can work on, and everyone can learn how to employ it.",
+      "user": {
+        "id": "bd59547e-7bbe-4bbe-a33e-a50c8701d628",
+        "username": "Bin.Cortes",
+        "email": "denis.yaakv707@home.com"
+      }
     },
     {
-      "id": "adff8bb2-01f8-4008-ad81-d9c0879d6850",
-      "date": "2020-05-20T02:15:25.277Z",
-      "content": "I separated from the Southern Baptists when they adopted the discriminatory attitude towards women, because I believe what Paul taught in Galatians that there is no distinction in God's eyes between men and women, slaves and masters, Jews and non-Jews - everybody is created equally in the eyes of God.",
-      "username": "Jianhua.Khatib",
-      "email": "jianhua-khatib539@aliceadsl.com"
+      "id": "5df8f468-cc16-440b-a07a-9b4c30860ac8",
+      "date": "2021-12-29T02:55:28.885Z",
+      "content": "Mainly what I learned from Buddy... was an attitude. He loved music, and he taught me that it shouldn't have any barriers to it.",
+      "user": {
+        "id": "bd59547e-7bbe-4bbe-a33e-a50c8701d628",
+        "username": "Bin.Cortes",
+        "email": "denis.yaakv707@home.com"
+      }
     },
     {
-      "id": "be293d06-5667-4ae8-ac5b-54b3bf5f2ba0",
-      "date": "2023-03-18T14:26:07.024Z",
-      "content": "What matters to me is that I do what I think is right and I see, I'm a numbers guy, that's my attitude. I know we have a debt tsunami coming, we are bankrupting this country and I'm in a position where I can actually advance ideas to prevent that from happening. That's exactly what I should be doing.",
-      "username": "Lijun_Barasa",
-      "email": "lijun-barasa908@orange.io"
+      "id": "9334477f-c36b-4c8c-9c9d-04d0f9a01350",
+      "date": "2021-08-18T04:52:56.934Z",
+      "content": "Listen, whatever makes the movie better. That's the attitude you have to have.",
+      "user": {
+        "id": "6b3b7e8b-87f0-4f29-a79e-0bb07f98b5c9",
+        "username": "Prasoet_Njuguna64",
+        "email": "kenneth-wood443@blueyonder.biz"
+      }
+    },
+    {
+      "id": "eb00a377-4079-448b-a6c1-c9fb1968a533",
+      "date": "2020-04-28T01:32:49.362Z",
+      "content": "Choosing to be positive and having a grateful attitude is going to determine how you're going to live your life.",
+      "user": {
+        "id": "9a391a3e-2640-446a-8d21-5159f34f4296",
+        "username": "Susan_Shemesh",
+        "email": "helgi.dudek@mac.info"
+      }
+    },
+    {
+      "id": "cdcb1951-d8b6-42a8-a944-84045827313e",
+      "date": "2022-11-01T00:41:06.868Z",
+      "content": "You don't drown by falling in water. You drown by staying there.",
+      "user": {
+        "id": "9a391a3e-2640-446a-8d21-5159f34f4296",
+        "username": "Susan_Shemesh",
+        "email": "helgi.dudek@mac.info"
+      }
+    },
+    {
+      "id": "6a511035-92a0-46db-989d-46fdb6d0df12",
+      "date": "2020-08-15T21:11:27.707Z",
+      "content": "I am shocked by the easy attitude of many in the media towards disclosing our Nation's secrets.",
+      "user": {
+        "id": "436f8e67-4e82-424c-a4dd-60ac7e6aa463",
+        "username": "Akira.Cherinsuk",
+        "email": "nikitavasileva310@mac.io"
+      }
+    },
+    {
+      "id": "4a4a2c3e-e315-47bd-b719-b8770555299b",
+      "date": "2022-04-20T14:29:03.177Z",
+      "content": "Our greatest glory is not in never failing but rising everytime we fall.",
+      "user": {
+        "id": "436f8e67-4e82-424c-a4dd-60ac7e6aa463",
+        "username": "Akira.Cherinsuk",
+        "email": "nikitavasileva310@mac.io"
+      }
     }
   ]
 }

@@ -21,7 +21,7 @@ export default async function PostsList() {
 								<div className='text-lg text-blue-600'>{post.content}</div>
 								<div className='flex items-center gap-1 text-sm'>
 									<div>Posted by</div>
-									<div className='font-bold text-blue-300'>{post.username}</div>
+									<div className='font-bold text-blue-300'>{post.user.username}</div>
 									<div>on</div>
 									<div className='font-bold text-blue-300'>
 										{dayjs(post.date).format('ddd, M/D/YY')}
@@ -29,7 +29,7 @@ export default async function PostsList() {
 								</div>
 							</div>
 							<div className='flex items-center gap-2'>
-								<Link href={`/${post.id}`}>
+								<Link href={`/posts/${post.id}`}>
 									<Button
 										label={<IoList />}
 										btnStyle='icon'

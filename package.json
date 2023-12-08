@@ -8,14 +8,14 @@
 		"dev-server": "concurrently \"yarn dev\" \"yarn server\"",
 		"build": "next build",
 		"start": "next start",
-		"generate-posts": "cd ./utils && node generatePosts.js 10 overwrite",
-		"add-posts": "cd ./utils && node generatePosts.js 10 append",
-		"clear-posts": "cd ./utils && node generatePosts.js null clear"
+		"new-posts": "cd ./data && node updatePosts.js new",
+		"clear-posts": "cd ./data && node updatePosts.js clear"
 	},
 	"dependencies": {
 		"concurrently": "^8.2.2",
 		"dayjs": "^1.11.10",
 		"next": "14.0.3",
+		"next-auth": "^4.24.5",
 		"react": "^18",
 		"react-dom": "^18",
 		"react-icons": "^4.12.0"

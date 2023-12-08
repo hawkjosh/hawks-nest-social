@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { deletePost } from '../api/routes'
-import Button from '@/app/components/ui/Button'
+import Button from '@/components/ui/Button'
 import { IoTrash } from 'react-icons/io5'
 
 const DeletePostBtn = ({ postId }) => {

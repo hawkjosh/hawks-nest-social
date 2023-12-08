@@ -2,15 +2,16 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { addPost } from '../api/routes'
-import { randUser } from '@ngneat/falso'
-import Button from '@/app/components/ui/Button'
+import { randUuid } from '@ngneat/falso'
+import Button from '@/components/ui/Button'
 
 const initialFormState = {
-	id: randUser().id,
 	date: new Date(),
 	content: '',
-	username: '',
-	email: '',
+	user: {
+		username: '',
+		email: ''
+	}
 }
 
 const AddPostForm = ({ closeModal }) => {
@@ -21,55 +22,75 @@ const AddPostForm = ({ closeModal }) => {
 		setPostContent(initialFormState)
 	}
 
+	// const handleInputChange = (e) => {
+	// 	const { name, value } = e.target
+	// 	setPostContent({ ...postContent, [name]: value })
+	// }
+
 	const handleInputChange = (e) => {
 		const { name, value } = e.target
-		setPostContent({ ...postContent, [name]: value })
+		if (name === 'username' || name === 'email') {
+			setPostContent({
+				...postContent,
+				user: {
+					...postContent.user,
+					[name]: value
+				}
+			})
+		} else setPostContent({ ...postContent, [name]: value })
 	}
 
 	const handleAddPost = async () => {
-		await addPost(postContent)
+		const newPost = {
+			id: randUuid(),
+			date: postContent.date,
+			content: postContent.content,
+			user: {
+				id: randUuid(),
+				username: postContent.user.username,
+				email: postContent.user.email
+			}
+		}
+		console.log(newPost)
+
+		await addPost(newPost)
 		router.refresh()
-		router.push('/')
 		closeModal()
 		resetForm()
 	}
 
 	return (
-		<form className='flex flex-col gap-4'>
-			<div className='text-4xl text-center text-white'>Make a Post!!</div>
+		<form className="flex flex-col gap-4">
+			<div className="text-4xl text-center text-white">Make a Post!!</div>
 			<textarea
-				name='content'
-				id='content'
+				name="content"
+				id="content"
 				value={postContent.content}
 				onChange={handleInputChange}
 				placeholder={`What's on your mind?`}
-				className='rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300'
+				className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
 			/>
-			<div className='flex items-center justify-center gap-3'>
+			<div className="flex items-center justify-center gap-3">
 				<input
-					type='text'
-					name='username'
-					id='username'
-					value={postContent.username}
+					type="text"
+					name="username"
+					id="username"
+					value={postContent.user.username}
 					onChange={handleInputChange}
-					placeholder='Enter your username...'
-					className='rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300'
+					placeholder="Enter your username..."
+					className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
 				/>
 				<input
-					type='text'
-					name='email'
-					id='email'
-					value={postContent.email}
+					type="text"
+					name="email"
+					id="email"
+					value={postContent.user.email}
 					onChange={handleInputChange}
-					placeholder='Enter your email...'
-					className='rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300'
+					placeholder="Enter your email..."
+					className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
 				/>
 			</div>
-			<Button
-				label='Add Post'
-				btnStyle='text'
-				onClick={handleAddPost}
-			/>
+			<Button label="Add Post" btnStyle="text" onClick={handleAddPost} />
 		</form>
 	)
 }

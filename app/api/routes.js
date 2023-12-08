@@ -1,7 +1,7 @@
-const dataUrl = 'http://localhost:4000/posts'
+const dataUrl = process.env.JSON_SERVER_URL
 
 async function getPosts() {
-	const res = await fetch(`${dataUrl}?_sort=date&_order=desc`, {
+	const res = await fetch(`${dataUrl}/posts?_sort=date&_order=desc`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ async function getPosts() {
 }
 
 async function getSinglePost(id) {
-	const res = await fetch(`${dataUrl}/${id}`, {
+	const res = await fetch(`${dataUrl}/posts/${id}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ async function getSinglePost(id) {
 }
 
 async function addPost(post) {
-  const res = await fetch(`${dataUrl}`, {
+  const res = await fetch(`${dataUrl}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,8 +34,20 @@ async function addPost(post) {
   return res.json()
 }
 
+async function editPost(id, post) {
+	const res = await fetch(`${dataUrl}/posts/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(post),
+		cache: 'no-cache',
+	})
+	return res.json()
+}
+
 async function deletePost(id) {
-	const res = await fetch(`${dataUrl}/${id}`, {
+	const res = await fetch(`${dataUrl}/posts/${id}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
