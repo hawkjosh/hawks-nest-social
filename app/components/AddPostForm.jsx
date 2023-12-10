@@ -5,6 +5,8 @@ import { addPost } from '../api/routes'
 import { randUuid } from '@ngneat/falso'
 import Button from '@/components/ui/Button'
 
+import { useSession } from 'next-auth/react'
+
 const initialFormState = {
 	date: new Date(),
 	content: '',
@@ -15,6 +17,7 @@ const initialFormState = {
 }
 
 const AddPostForm = ({ closeModal }) => {
+	const { data: session } = useSession()
 	const router = useRouter()
 	const [postContent, setPostContent] = useState(initialFormState)
 
@@ -22,23 +25,23 @@ const AddPostForm = ({ closeModal }) => {
 		setPostContent(initialFormState)
 	}
 
-	// const handleInputChange = (e) => {
-	// 	const { name, value } = e.target
-	// 	setPostContent({ ...postContent, [name]: value })
-	// }
-
 	const handleInputChange = (e) => {
 		const { name, value } = e.target
-		if (name === 'username' || name === 'email') {
-			setPostContent({
-				...postContent,
-				user: {
-					...postContent.user,
-					[name]: value
-				}
-			})
-		} else setPostContent({ ...postContent, [name]: value })
+		setPostContent({ ...postContent, [name]: value })
 	}
+
+	// const handleInputChange = (e) => {
+	// 	const { name, value } = e.target
+	// 	if (name === 'username' || name === 'email') {
+	// 		setPostContent({
+	// 			...postContent,
+	// 			user: {
+	// 				...postContent.user,
+	// 				[name]: value
+	// 			}
+	// 		})
+	// 	} else setPostContent({ ...postContent, [name]: value })
+	// }
 
 	const handleAddPost = async () => {
 		const newPost = {
@@ -47,8 +50,10 @@ const AddPostForm = ({ closeModal }) => {
 			content: postContent.content,
 			user: {
 				id: randUuid(),
-				username: postContent.user.username,
-				email: postContent.user.email
+				// username: postContent.user.username,
+				// email: postContent.user.email
+				username: session?.user?.name,
+				email: session?.user?.email
 			}
 		}
 		console.log(newPost)
@@ -70,7 +75,7 @@ const AddPostForm = ({ closeModal }) => {
 				placeholder={`What's on your mind?`}
 				className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
 			/>
-			<div className="flex items-center justify-center gap-3">
+			{/* <div className="flex items-center justify-center gap-3">
 				<input
 					type="text"
 					name="username"
@@ -89,7 +94,7 @@ const AddPostForm = ({ closeModal }) => {
 					placeholder="Enter your email..."
 					className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
 				/>
-			</div>
+			</div> */}
 			<Button label="Add Post" btnStyle="text" onClick={handleAddPost} />
 		</form>
 	)

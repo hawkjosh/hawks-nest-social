@@ -15,31 +15,21 @@ function AuthButton() {
 	const { data: session } = useSession()
 
 	if (session) {
-		// return (
-		// 	<div className="flex items-center gap-4">
-		// 		<div className="text-blue-600">{session.user.email}</div>
-		// 		<Button
-		// 			label="Sign Out"
-		// 			btnStyle="text"
-		// 			onClick={() => signOut()}
-		// 		/>
-		// 	</div>
-		// )
 		return (
 			<>
-				{session?.user?.name} <br />
+				{session?.user?.image && (
+					<img
+						src={session.user.image}
+						alt={session.user.name}
+						className="w-8 h-8 rounded-full"
+					/>
+				)}
+				{session?.user?.name}
 				<Button label="Sign Out" btnStyle="text" onClick={() => signOut()} />
 			</>
 		)
 	}
 
-	// return (
-	// 	<Button
-	// 		label="Sign In"
-	// 		btnStyle="text"
-	// 		onClick={() => signIn()}
-	// 	/>
-	// )
 	return (
 		<>
 			Not signed in <br />
@@ -49,7 +39,8 @@ function AuthButton() {
 }
 
 const ACTIVE_ROUTE = 'py-1 px-2 text-gray-300 bg-gray-700'
-const INACTIVE_ROUTE = 'py-1 px-2 text-gray-500 hover:text-gray-300 hover:bg-gray-700'
+const INACTIVE_ROUTE =
+	'py-1 px-2 text-gray-500 hover:text-gray-300 hover:bg-gray-700'
 
 export default function Navbar() {
 	const pathname = usePathname()
