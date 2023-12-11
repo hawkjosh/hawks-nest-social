@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { getSinglePost } from '@/api/routes'
+import { getPostById } from '@/api/routes'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 
 export default async function SinglePost({ params }) {
-	const post = await getSinglePost(params.id)
+	const post = await getPostById(params.id)
 
 	return (
 		<Card>
@@ -46,7 +46,7 @@ export default async function SinglePost({ params }) {
 					</div>
 				</div>
 				<Link href="/posts" className="mt-6 place-self-center">
-					<Button label="Back to Posts" btnStyle="text" />
+					<Button label="Back to Posts" btnStyle="btn" />
 				</Link>
 			</div>
 		</Card>

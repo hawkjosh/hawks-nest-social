@@ -1,67 +1,45 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { addPost } from '../api/routes'
+import { addUser, getUserByEmail, addPost } from '../api/routes'
 import { randUuid } from '@ngneat/falso'
 import Button from '@/components/ui/Button'
 
 import { useSession } from 'next-auth/react'
 
-const initialFormState = {
-	date: new Date(),
-	content: '',
-	user: {
-		username: '',
-		email: ''
-	}
-}
-
 const AddPostForm = ({ closeModal }) => {
 	const { data: session } = useSession()
 	const router = useRouter()
-	const [postContent, setPostContent] = useState(initialFormState)
+	const [postContent, setPostContent] = useState('')
 
-	const resetForm = () => {
-		setPostContent(initialFormState)
-	}
-
-	const handleInputChange = (e) => {
-		const { name, value } = e.target
-		setPostContent({ ...postContent, [name]: value })
-	}
-
-	// const handleInputChange = (e) => {
-	// 	const { name, value } = e.target
-	// 	if (name === 'username' || name === 'email') {
-	// 		setPostContent({
-	// 			...postContent,
-	// 			user: {
-	// 				...postContent.user,
-	// 				[name]: value
-	// 			}
-	// 		})
-	// 	} else setPostContent({ ...postContent, [name]: value })
-	// }
+	const handleInputChange = (e) => setPostContent(e.target.value)
 
 	const handleAddPost = async () => {
-		const newPost = {
-			id: randUuid(),
-			date: postContent.date,
-			content: postContent.content,
-			user: {
+		const existingUserData = await getUserByEmail(session.user.email)
+		if (existingUserData.length) {
+			await addPost({
 				id: randUuid(),
-				// username: postContent.user.username,
-				// email: postContent.user.email
+				date: new Date().toISOString(),
+				content: postContent,
+				userId: existingUserData[0].id
+			})
+		} else {
+			const newUser = {
+				id: randUuid(),
 				username: session?.user?.name,
 				email: session?.user?.email
 			}
+			const { id: newUserId } = await addUser(newUser)
+			await addPost({
+				id: randUuid(),
+				date: new Date().toISOString(),
+				content: postContent,
+				userId: newUserId
+			})
 		}
-		console.log(newPost)
-
-		await addPost(newPost)
 		router.refresh()
+		setPostContent('')
 		closeModal()
-		resetForm()
 	}
 
 	return (
@@ -70,32 +48,12 @@ const AddPostForm = ({ closeModal }) => {
 			<textarea
 				name="content"
 				id="content"
-				value={postContent.content}
+				value={postContent}
 				onChange={handleInputChange}
 				placeholder={`What's on your mind?`}
 				className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
 			/>
-			{/* <div className="flex items-center justify-center gap-3">
-				<input
-					type="text"
-					name="username"
-					id="username"
-					value={postContent.user.username}
-					onChange={handleInputChange}
-					placeholder="Enter your username..."
-					className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
-				/>
-				<input
-					type="text"
-					name="email"
-					id="email"
-					value={postContent.user.email}
-					onChange={handleInputChange}
-					placeholder="Enter your email..."
-					className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
-				/>
-			</div> */}
-			<Button label="Add Post" btnStyle="text" onClick={handleAddPost} />
+			<Button label="Add Post" btnStyle="btn" onClick={handleAddPost} />
 		</form>
 	)
 }
