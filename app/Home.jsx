@@ -9,8 +9,8 @@ export default async function Home() {
 					Welcome {session?.user?.name}
 				</div>
 			) : (
-				<div className="text-xl font-light italic text-red-600">
-					Login to start posting!
+				<div className="text-xl font-light italic text-red-600 text-center">
+					Please sign in to start using the app!
 				</div>
 			)}
 		</div>

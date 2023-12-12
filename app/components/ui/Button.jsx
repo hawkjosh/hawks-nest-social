@@ -12,13 +12,15 @@ const Button = ({
 		<button
 			type={btnType || 'button'}
 			className={twMerge(
-				'uppercase px-2 py-1 border w-fit rounded-md flex place-items-center place-content-center place-self-center cursor-pointer transition-all duration-300 hover:shadow-md hover:filter hover:brightness-105',
+				'uppercase px-3 py-2 w-fit rounded-lg cursor-pointer font-medium text-sm text-center',
+				// btnStyle === 'btn' &&
+				// 	'text-sm bg-slate-200 border-slate-400 hover:bg-slate-400 hover:border-slate-600',
 				btnStyle === 'btn' &&
-					'text-sm bg-slate-200 border-slate-400 hover:bg-slate-400 hover:border-slate-600',
+					'text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
 				btnStyle === 'link' &&
 					'border-none hover:bg-transparent hover:border-none hover:shadow-none hover:filter-none hover:text-blue-500',
 				btnStyle === 'icon' &&
-					'text-2xl p-1 border-none rounded-full hover:transform hover:scale-125 hover:shadow-none hover:filter-none',
+					'text-2xl p-1 rounded-full transition-transform duration-300 hover:transform hover:scale-125 hover:shadow-none hover:filter-none',
 				props.disabled &&
 					'text-gray-400 bg-gray-200 border-gray-200 cursor-not-allowed hover:bg-gray-200 hover:border-gray-200 hover:shadow-none hover:filter-none',
 				className

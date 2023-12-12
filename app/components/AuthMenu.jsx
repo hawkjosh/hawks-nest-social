@@ -30,7 +30,7 @@ export default function AuthMenu() {
 	return (
 		<>
 			<div className="flex items-center gap-4 relative">
-				<MenuBtn toggleMenu={toggleMenu} />
+				<MenuBtn closeMenu={() => setMenuOpen(false)} toggleMenu={toggleMenu} />
 				<Menu
 					menuOpen={menuOpen}
 					closeMenu={toggleMenu}

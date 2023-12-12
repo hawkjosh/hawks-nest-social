@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { addUser, getUserByEmail, addPost } from '../api/routes'
 import { randUuid } from '@ngneat/falso'
 import Button from '@/components/ui/Button'
+import Textarea from '@/components/ui/Textarea'
 
 import { useSession } from 'next-auth/react'
 
@@ -43,17 +44,13 @@ const AddPostForm = ({ closeModal }) => {
 	}
 
 	return (
-		<form className="flex flex-col gap-4">
-			<div className="text-4xl text-center text-white">Make a Post!!</div>
-			<textarea
-				name="content"
-				id="content"
-				value={postContent}
-				onChange={handleInputChange}
-				placeholder={`What's on your mind?`}
-				className="rounded-lg placeholder:text-gray-400 focus:placeholder:text-gray-300"
+		<form className="flex flex-col gap-4 w-3/4 h-1/2">
+			<Textarea
+				postContent={postContent}
+				handleInputChange={handleInputChange}
+				label={`What's on your mind?`}
 			/>
-			<Button label="Add Post" btnStyle="btn" onClick={handleAddPost} />
+			<Button label="Post It!" btnStyle="btn" onClick={handleAddPost} />
 		</form>
 	)
 }

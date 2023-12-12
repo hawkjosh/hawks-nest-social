@@ -1,7 +1,7 @@
 import Button from '@/components/ui/Button'
 import { signIn, useSession } from 'next-auth/react'
 
-export default function MenuBtn({ toggleMenu }) {
+export default function MenuBtn({ closeMenu, toggleMenu }) {
 	const { data: session } = useSession()
 
 	const userIcon = session?.user?.image ? (
@@ -18,7 +18,7 @@ export default function MenuBtn({ toggleMenu }) {
 
 	const handleSignIn = () => {
 		signIn()
-		toggleMenu()
+		closeMenu()
 	}
 
 	return (
