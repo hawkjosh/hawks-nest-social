@@ -70,15 +70,6 @@ function updatePosts(action, count) {
 	const posts = []
 
 	for (let i = 0; i < count; i++) {
-		// const user = randUser()
-		// const randomId = user.id
-		// const randomUsername = user.username
-		// const randomEmail = user.email
-		// const randomDate = randBetweenDate({
-		// 	from: new Date('01/01/2020'),
-		// 	to: new Date(),
-		// })
-		// const randomContent = randQuote()
 		const randomId = randUuid()
 		const randomDate = randBetweenDate({
 			from: new Date('01/01/2020'),

@@ -14,7 +14,7 @@ async function addUser(user) {
 }
 
 async function getUsers() {
-	const res = await fetch(`${dataUrl}/users`, {
+	const res = await fetch(`${dataUrl}/users?_sort=username`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'
