@@ -4,10 +4,10 @@ import { Posts } from '../api/routes'
 import Button from '@/components/ui/Button'
 import { IoTrash } from 'react-icons/io5'
 
-const DeletePostBtn = ({ postId }) => {
+const EditPostBtn = ({ postId }) => {
 	const router = useRouter()
 
-	const handleDeletePost = async () => {
+	const handleBtnClick = async () => {
 		await Posts.delete(postId)
 		router.refresh()
 	}
@@ -22,4 +22,4 @@ const DeletePostBtn = ({ postId }) => {
 	)
 }
 
-export default DeletePostBtn
+export default EditPostBtn

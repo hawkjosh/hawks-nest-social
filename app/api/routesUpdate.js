@@ -3,18 +3,20 @@ import {
 	randPhrase,
 	randQuote,
 	randUser,
-	randUuid
+	randUuid,
 } from '@ngneat/falso'
 
-const dataUrl = 'http://localhost:4000'
+// const dataUrl = 'http://localhost:4000'
+const dataUrl = process.env.JSON_SERVER_URL || 'http://localhost:4000'
 
 const setOptions = (method, body) => {
 	return {
 		method: method,
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(body)
+		body: JSON.stringify(body) || null,
+		cache: 'no-cache',
 	}
 }
 
@@ -35,7 +37,7 @@ const Users = {
 		const newUser = {
 			id: randUuid(),
 			username: randUser().username,
-			email: randUser().email
+			email: randUser().email,
 		}
 
 		return await fetchReq(`${dataUrl}/users`, setOptions('POST', newUser))
@@ -67,8 +69,8 @@ const Users = {
 			Users.userData[Math.floor(Math.random() * Users.userData.length)]
 				.username,
 		email: () =>
-			Users.userData[Math.floor(Math.random() * Users.userData.length)].email
-	}
+			Users.userData[Math.floor(Math.random() * Users.userData.length)].email,
+	},
 }
 
 const Posts = {
@@ -86,10 +88,10 @@ const Posts = {
 			id: randUuid(),
 			date: randBetweenDate({
 				from: new Date('12/01/2023').toISOString(),
-				to: new Date().toISOString()
+				to: new Date().toISOString(),
 			}),
 			content: randQuote(),
-			userId: Users.getRandom.id()
+			userId: Users.getRandom.id(),
 		}
 
 		return await fetchReq(`${dataUrl}/posts`, setOptions('POST', newPost))
@@ -123,8 +125,8 @@ const Posts = {
 		content: () =>
 			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].content,
 		userId: () =>
-			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].userId
-	}
+			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].userId,
+	},
 }
 
 const Comments = {
@@ -144,7 +146,7 @@ const Comments = {
 			date: new Date().toISOString(),
 			content: randPhrase(),
 			userId: Users.getRandom.id(),
-			postId: Posts.getRandom.id()
+			postId: Posts.getRandom.id(),
 		}
 
 		return await fetchReq(`${dataUrl}/comments`, setOptions('POST', newComment))
@@ -199,8 +201,8 @@ const Comments = {
 		userId: () =>
 			Comments.commentData[
 				Math.floor(Math.random() * Comments.commentData.length)
-			].userId
-	}
+			].userId,
+	},
 }
 
 // Users.add()
@@ -217,3 +219,6 @@ const Comments = {
 // Comments.getOne()
 // Comments.getUser()
 // Comments.getPost()
+
+// const test = await Users.add()
+// console.log(test)

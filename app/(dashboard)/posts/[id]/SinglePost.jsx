@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import { getPostById } from '@/api/routes'
+import { Users, Posts } from '@/api/routes'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 
 export default async function SinglePost({ params }) {
-	const post = await getPostById(params.id)
+	const post = await Posts.getOne(params.id)
+	const userData = await Users.getOne('id', post.userId)
+	
+	const { id: userId, username, email} = userData[0]
 
 	return (
 		<Card>
@@ -34,15 +37,15 @@ export default async function SinglePost({ params }) {
 					<div>Author Info</div>
 					<div className="flex items-center gap-3">
 						<div className="font-semibold uppercase">User ID:</div>
-						<div className="text-blue-600">{post.user.id}</div>
+						<div className="text-blue-600">{userId}</div>
 					</div>
 					<div className="flex items-center gap-3">
 						<div className="font-semibold uppercase">Username:</div>
-						<div className="text-blue-600">{post.user.username}</div>
+						<div className="text-blue-600">{username}</div>
 					</div>
 					<div className="flex items-center gap-3">
 						<div className="font-semibold uppercase">Email:</div>
-						<div className="text-blue-600">{post.user.email}</div>
+						<div className="text-blue-600">{email}</div>
 					</div>
 				</div>
 				<Link href="/posts" className="mt-6 place-self-center">

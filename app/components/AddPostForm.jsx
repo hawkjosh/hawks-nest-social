@@ -1,8 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { addUser, getUserByEmail, addPost } from '../api/routes'
-import { randUuid } from '@ngneat/falso'
+import { Users, Posts } from '../api/routes'
 import Button from '@/components/ui/Button'
 import Textarea from '@/components/ui/Textarea'
 
@@ -16,27 +15,13 @@ const AddPostForm = ({ closeModal }) => {
 	const handleInputChange = (e) => setPostContent(e.target.value)
 
 	const handleAddPost = async () => {
-		const existingUserData = await getUserByEmail(session.user.email)
+		const existingUserData = await Users.getOne('email', session.user.email)
 		if (existingUserData.length) {
-			await addPost({
-				id: randUuid(),
-				date: new Date().toISOString(),
-				content: postContent,
-				userId: existingUserData[0].id
-			})
+			await Posts.add(postContent, existingUserData[0].id)
 		} else {
-			const newUser = {
-				id: randUuid(),
-				username: session?.user?.name,
-				email: session?.user?.email
-			}
-			const { id: newUserId } = await addUser(newUser)
-			await addPost({
-				id: randUuid(),
-				date: new Date().toISOString(),
-				content: postContent,
-				userId: newUserId
-			})
+		await Users.add(session.user.name, session.user.email)
+		const newUserData = await Users.getOne('email', session.user.email)
+		await Posts.add(postContent, newUserData[0].id)
 		}
 		router.refresh()
 		setPostContent('')
@@ -44,7 +29,7 @@ const AddPostForm = ({ closeModal }) => {
 	}
 
 	return (
-		<form className="flex flex-col gap-4 w-3/4 h-1/2">
+		<form className="flex flex-col w-3/4 gap-4 h-1/2">
 			<Textarea
 				postContent={postContent}
 				handleInputChange={handleInputChange}

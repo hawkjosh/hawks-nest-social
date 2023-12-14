@@ -1,159 +1,198 @@
+import { randUuid } from '@ngneat/falso'
+
 const dataUrl = process.env.JSON_SERVER_URL
 
-async function addUser(user) {
-	const res = await fetch(`${dataUrl}/users`, {
-		method: 'POST',
+const setOptions = (method, body) => {
+	return {
+		method: method,
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(user),
-		cache: 'no-cache'
-	})
-
-	return res.json()
-}
-
-async function getUsers() {
-	const res = await fetch(`${dataUrl}/users?_sort=username`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-
-	return res.json()
-}
-
-async function getUserById(id) {
-	const res = await fetch(`${dataUrl}/users/${id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-
-	return res.json()
-}
-
-async function getUserByEmail(email) {
-	const res = await fetch(`${dataUrl}/users?email=${email}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-
-	return res.json()
-}
-
-async function getPosts() {
-	const postsRes = await fetch(`${dataUrl}/posts?_sort=date&_order=desc`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-
-	const posts = await postsRes.json()
-
-	const userPosts = await Promise.all(
-		posts.map(async (post) => {
-			const userRes = await fetch(`${dataUrl}/users/${post.userId}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				cache: 'no-cache'
-			})
-
-			const user = await userRes.json()
-
-			return {
-				...post,
-				user
-			}
-		})
-	)
-
-	return userPosts
-}
-
-async function getPostById(id) {
-	const postRes = await fetch(`${dataUrl}/posts/${id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-
-	const post = await postRes.json()
-
-	const userRes = await fetch(`${dataUrl}/users/${post.userId}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-
-	const user = await userRes.json()
-
-	const userPost = {
-		...post,
-		user
+		body: JSON.stringify(body) || null,
+		cache: 'no-cache',
 	}
-
-	return userPost
 }
 
-async function addPost(post) {
-	const res = await fetch(`${dataUrl}/posts`, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(post),
-		cache: 'no-cache'
-	})
-
-	return res.json()
+const fetchReq = async (url, options) => {
+	const response = await fetch(url, options)
+	return response.json()
 }
 
-// async function editPost(id, post) {
-// 	const res = await fetch(`${dataUrl}/posts/${id}`, {
-// 		method: 'PUT',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify(post),
-// 		cache: 'no-cache'
-// 	})
-// 	return res.json()
-// }
+const Users = {
+	userData: null,
 
-async function deletePost(id) {
-	const res = await fetch(`${dataUrl}/posts/${id}`, {
-		method: 'DELETE',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		cache: 'no-cache'
-	})
-	return
+	initialize: async () => {
+		const users = await Users.getAll()
+		Users.userData = users
+	},
+
+	add: async (username, email) => {
+		const newUser = {
+			id: randUuid(),
+			username: username,
+			email: email,
+		}
+
+		return await fetchReq(`${dataUrl}/users`, setOptions('POST', newUser))
+	},
+
+	getAll: async () => await fetchReq(`${dataUrl}/users`, setOptions('GET')),
+
+	getOne: async (query, userParam) => {
+		await Users.initialize()
+
+		return await fetchReq(
+			`${dataUrl}/users?${query}=${userParam}`,
+			setOptions('GET')
+		)
+	},
+
+	getRandom: {
+		id: () =>
+			Users.userData[Math.floor(Math.random() * Users.userData.length)].id,
+		username: () =>
+			Users.userData[Math.floor(Math.random() * Users.userData.length)]
+				.username,
+		email: () =>
+			Users.userData[Math.floor(Math.random() * Users.userData.length)].email,
+	},
 }
 
-export {
-	addUser,
-	getUsers,
-	getUserById,
-	getUserByEmail,
-	getPosts,
-	getPostById,
-	addPost,
-	deletePost
+const Posts = {
+	postData: null,
+
+	initialize: async () => {
+		const posts = await Posts.getAll()
+		Posts.postData = posts
+	},
+
+	add: async (content, userId) => {
+		await Users.initialize()
+
+		const newPost = {
+			id: randUuid(),
+			date: new Date().toISOString(),
+			content: content,
+			userId: userId,
+		}
+
+		return await fetchReq(`${dataUrl}/posts`, setOptions('POST', newPost))
+	},
+
+	getAll: async () =>
+		await fetchReq(
+			`${dataUrl}/posts?_sort=date&_order=desc`,
+			setOptions('GET')
+		),
+
+	getOne: async (postId) => {
+		await Posts.initialize()
+
+		return await fetchReq(`${dataUrl}/posts/${postId}`, setOptions('GET'))
+	},
+
+	getUser: async (userId) => {
+		await Users.initialize()
+
+		return await fetchReq(
+			`${dataUrl}/posts?userId=${userId}`,
+			setOptions('GET')
+		)
+	},
+
+	edit: async (postId, content) => {
+		return await fetchReq(
+			`${dataUrl}/posts/${postId}`,
+			setOptions('PATCH', { content: content })
+		)
+	},
+
+	delete: async (postId) =>
+		await fetchReq(`${dataUrl}/posts/${postId}`, setOptions('DELETE')),
+
+	getRandom: {
+		id: () =>
+			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].id,
+		date: () =>
+			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].date,
+		content: () =>
+			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].content,
+		userId: () =>
+			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].userId,
+	},
 }
+
+const Comments = {
+	commentData: null,
+
+	initialize: async () => {
+		const comments = await Comments.getAll()
+		Comments.commentData = comments
+	},
+
+	add: async (content, userId, postId) => {
+		await Users.initialize()
+		await Posts.initialize()
+
+		const newComment = {
+			id: randUuid(),
+			date: new Date().toISOString(),
+			content: content,
+			userId: userId,
+			postId: postId,
+		}
+
+		return await fetchReq(`${dataUrl}/comments`, setOptions('POST', newComment))
+	},
+
+	getAll: async () => await fetchReq(`${dataUrl}/comments`, setOptions('GET')),
+
+	getOne: async (commentId) => {
+		await Comments.initialize()
+
+		return await fetchReq(`${dataUrl}/comments/${commentId}`, setOptions('GET'))
+	},
+
+	getUser: async (userId) => {
+		await Users.initialize()
+
+		return await fetchReq(
+			`${dataUrl}/comments?userId=${userId}`,
+			setOptions('GET')
+		)
+	},
+
+	getPost: async (postId) => {
+		await Posts.initialize()
+
+		return await fetchReq(
+			`${dataUrl}/comments?postId=${postId}`,
+			setOptions('GET')
+		)
+	},
+
+	getRandom: {
+		id: () =>
+			Comments.commentData[
+				Math.floor(Math.random() * Comments.commentData.length)
+			].id,
+		date: () =>
+			Comments.commentData[
+				Math.floor(Math.random() * Comments.commentData.length)
+			].date,
+		content: () =>
+			Comments.commentData[
+				Math.floor(Math.random() * Comments.commentData.length)
+			].content,
+		postId: () =>
+			Comments.commentData[
+				Math.floor(Math.random() * Comments.commentData.length)
+			].postId,
+		userId: () =>
+			Comments.commentData[
+				Math.floor(Math.random() * Comments.commentData.length)
+			].userId,
+	},
+}
+
+export { Users, Posts, Comments }

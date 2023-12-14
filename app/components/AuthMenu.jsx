@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import AddPostForm from '@/components/AddPostForm'
 import Button from '@/components/ui/Button'
@@ -11,6 +11,8 @@ import { signOut, useSession } from 'next-auth/react'
 
 
 export default function AuthMenu() {
+	const menuRef = useRef()
+	const addPostModalRef = useRef()
 	const { data: session } = useSession()
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [modalOpen, setModalOpen] = useState(false)
@@ -29,12 +31,13 @@ export default function AuthMenu() {
 
 	return (
 		<>
-			<div className="flex items-center gap-4 relative">
+			<div className="relative flex items-center gap-4">
 				<MenuBtn closeMenu={() => setMenuOpen(false)} toggleMenu={toggleMenu} />
 				<Menu
+					ref={menuRef}
 					menuOpen={menuOpen}
 					closeMenu={toggleMenu}
-					className="top-12 right-0 bg-slate-400 rounded-lg w-max"
+					className="right-0 rounded-lg top-12 bg-slate-400 w-max"
 				>
 					<div className="flex flex-col items-center justify-center gap-4 p-4">
 						<div className="text-xl font-extrabold text-white">
@@ -51,7 +54,7 @@ export default function AuthMenu() {
 					</div>
 				</Menu>
 			</div>
-			<Modal modalOpen={modalOpen} closeModal={toggleModal}>
+			<Modal ref={addPostModalRef} modalOpen={modalOpen} closeModal={toggleModal}>
 				<AddPostForm closeModal={toggleModal} />
 			</Modal>
 		</>
