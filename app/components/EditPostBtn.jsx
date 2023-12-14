@@ -1,24 +1,37 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import { Posts } from '../api/routes'
+import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 import Button from '@/components/ui/Button'
-import { IoTrash } from 'react-icons/io5'
+import EditPostForm from '@/components/EditPostForm'
+import Modal from '@/components/ui/Modal'
+import { IoPencil } from 'react-icons/io5'
 
-const EditPostBtn = ({ postId }) => {
-	const router = useRouter()
+const EditPostBtn = ({ postId, currPostContent, postEmail }) => {
+	const { data: session } = useSession()
+	const [modalOpen, setModalOpen] = useState(false)
 
-	const handleBtnClick = async () => {
-		await Posts.delete(postId)
-		router.refresh()
-	}
+	const toggleModal = () => setModalOpen(!modalOpen)
 
 	return (
-		<Button
-			label={<IoTrash />}
-			btnStyle='icon'
-			onClick={handleDeletePost}
-			className='hover:text-red-500'
-		/>
+		<>
+			{session?.user?.email !== postEmail ? null : (
+				<>
+					<Button
+						label={<IoPencil />}
+						btnStyle="icon"
+						onClick={toggleModal}
+						className="hover:text-blue-500"
+					/>
+					<Modal modalOpen={modalOpen} closeModal={toggleModal}>
+						<EditPostForm
+							closeModal={toggleModal}
+							postId={postId}
+							currPostContent={currPostContent}
+						/>
+					</Modal>
+				</>
+			)}
+		</>
 	)
 }
 

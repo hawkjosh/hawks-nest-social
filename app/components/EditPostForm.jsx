@@ -7,22 +7,14 @@ import Textarea from '@/components/ui/Textarea'
 
 import { useSession } from 'next-auth/react'
 
-const EditPostForm = ({ postId, closeModal }) => {
-	const { data: session } = useSession()
+const EditPostForm = ({ postId, currPostContent, closeModal }) => {
 	const router = useRouter()
-	const [postContent, setPostContent] = useState(existingPostContent)
+	const [postContent, setPostContent] = useState(currPostContent)
 
 	const handleInputChange = (e) => setPostContent(e.target.value)
 
-	const existingPostContent = async () => {
-		const existingPostData = await Posts.getOne(postId)
-		return existingPostData[0].content
-	}
-
 	const handleEditPost = async () => {
-		// const existingUserData = await Users.getOne('email', session.user.email)
 		await Posts.edit(postId, postContent)
-		
 		router.refresh()
 		setPostContent('')
 		closeModal()
@@ -31,11 +23,12 @@ const EditPostForm = ({ postId, closeModal }) => {
 	return (
 		<form className="flex flex-col w-3/4 gap-4 h-1/2">
 			<Textarea
+				textareaType="edit"
 				postContent={postContent}
 				handleInputChange={handleInputChange}
-				label={`What's on your mind?`}
+				label="What should we change?"
 			/>
-			<Button label="Post It!" btnStyle="btn" onClick={handleEditPost} />
+			<Button label="Update" btnStyle="btn" onClick={handleEditPost} />
 		</form>
 	)
 }

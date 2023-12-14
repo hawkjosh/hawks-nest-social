@@ -6,10 +6,10 @@ const setOptions = (method, body) => {
 	return {
 		method: method,
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify(body) || null,
-		cache: 'no-cache',
+		cache: 'no-cache'
 	}
 }
 
@@ -30,7 +30,7 @@ const Users = {
 		const newUser = {
 			id: randUuid(),
 			username: username,
-			email: email,
+			email: email
 		}
 
 		return await fetchReq(`${dataUrl}/users`, setOptions('POST', newUser))
@@ -54,8 +54,8 @@ const Users = {
 			Users.userData[Math.floor(Math.random() * Users.userData.length)]
 				.username,
 		email: () =>
-			Users.userData[Math.floor(Math.random() * Users.userData.length)].email,
-	},
+			Users.userData[Math.floor(Math.random() * Users.userData.length)].email
+	}
 }
 
 const Posts = {
@@ -73,7 +73,7 @@ const Posts = {
 			id: randUuid(),
 			date: new Date().toISOString(),
 			content: content,
-			userId: userId,
+			userId: userId
 		}
 
 		return await fetchReq(`${dataUrl}/posts`, setOptions('POST', newPost))
@@ -118,8 +118,8 @@ const Posts = {
 		content: () =>
 			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].content,
 		userId: () =>
-			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].userId,
-	},
+			Posts.postData[Math.floor(Math.random() * Posts.postData.length)].userId
+	}
 }
 
 const Comments = {
@@ -139,7 +139,7 @@ const Comments = {
 			date: new Date().toISOString(),
 			content: content,
 			userId: userId,
-			postId: postId,
+			postId: postId
 		}
 
 		return await fetchReq(`${dataUrl}/comments`, setOptions('POST', newComment))
@@ -191,8 +191,8 @@ const Comments = {
 		userId: () =>
 			Comments.commentData[
 				Math.floor(Math.random() * Comments.commentData.length)
-			].userId,
-	},
+			].userId
+	}
 }
 
 export { Users, Posts, Comments }
