@@ -1,6 +1,6 @@
-import { randUuid } from '@ngneat/falso'
+import { v4 as uuidv4 } from 'uuid'
 
-const dataUrl = process.env.JSON_SERVER_URL
+const dbUrl = process.env.DATABASE_URL
 
 const setOptions = (method, body) => {
 	return {
@@ -28,21 +28,21 @@ const Users = {
 
 	add: async (username, email) => {
 		const newUser = {
-			id: randUuid(),
+			id: uuidv4(),
 			username: username,
 			email: email
 		}
 
-		return await fetchReq(`${dataUrl}/users`, setOptions('POST', newUser))
+		return await fetchReq(`${dbUrl}/users`, setOptions('POST', newUser))
 	},
 
-	getAll: async () => await fetchReq(`${dataUrl}/users`, setOptions('GET')),
+	getAll: async () => await fetchReq(`${dbUrl}/users`, setOptions('GET')),
 
 	getOne: async (query, userParam) => {
 		await Users.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/users?${query}=${userParam}`,
+			`${dbUrl}/users?${query}=${userParam}`,
 			setOptions('GET')
 		)
 	},
@@ -70,45 +70,45 @@ const Posts = {
 		await Users.initialize()
 
 		const newPost = {
-			id: randUuid(),
+			id: uuidv4(),
 			date: new Date().toISOString(),
 			content: content,
 			userId: userId
 		}
 
-		return await fetchReq(`${dataUrl}/posts`, setOptions('POST', newPost))
+		return await fetchReq(`${dbUrl}/posts`, setOptions('POST', newPost))
 	},
 
 	getAll: async () =>
 		await fetchReq(
-			`${dataUrl}/posts?_sort=date&_order=desc`,
+			`${dbUrl}/posts?_sort=date&_order=desc`,
 			setOptions('GET')
 		),
 
 	getOne: async (postId) => {
 		await Posts.initialize()
 
-		return await fetchReq(`${dataUrl}/posts/${postId}`, setOptions('GET'))
+		return await fetchReq(`${dbUrl}/posts/${postId}`, setOptions('GET'))
 	},
 
 	getUser: async (userId) => {
 		await Users.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/posts?userId=${userId}`,
+			`${dbUrl}/posts?userId=${userId}`,
 			setOptions('GET')
 		)
 	},
 
 	edit: async (postId, content) => {
 		return await fetchReq(
-			`${dataUrl}/posts/${postId}`,
+			`${dbUrl}/posts/${postId}`,
 			setOptions('PATCH', { content: content })
 		)
 	},
 
 	delete: async (postId) =>
-		await fetchReq(`${dataUrl}/posts/${postId}`, setOptions('DELETE')),
+		await fetchReq(`${dbUrl}/posts/${postId}`, setOptions('DELETE')),
 
 	getRandom: {
 		id: () =>
@@ -135,29 +135,29 @@ const Comments = {
 		await Posts.initialize()
 
 		const newComment = {
-			id: randUuid(),
+			id: uuidv4(),
 			date: new Date().toISOString(),
 			content: content,
 			userId: userId,
 			postId: postId
 		}
 
-		return await fetchReq(`${dataUrl}/comments`, setOptions('POST', newComment))
+		return await fetchReq(`${dbUrl}/comments`, setOptions('POST', newComment))
 	},
 
-	getAll: async () => await fetchReq(`${dataUrl}/comments`, setOptions('GET')),
+	getAll: async () => await fetchReq(`${dbUrl}/comments`, setOptions('GET')),
 
 	getOne: async (commentId) => {
 		await Comments.initialize()
 
-		return await fetchReq(`${dataUrl}/comments/${commentId}`, setOptions('GET'))
+		return await fetchReq(`${dbUrl}/comments/${commentId}`, setOptions('GET'))
 	},
 
 	getUser: async (userId) => {
 		await Users.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/comments?userId=${userId}`,
+			`${dbUrl}/comments?userId=${userId}`,
 			setOptions('GET')
 		)
 	},
@@ -166,10 +166,20 @@ const Comments = {
 		await Posts.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/comments?postId=${postId}`,
+			`${dbUrl}/comments?postId=${postId}`,
 			setOptions('GET')
 		)
 	},
+
+	edit: async (commentId, content) => {
+		return await fetchReq(
+			`${dbUrl}/comments/${commentId}`,
+			setOptions('PATCH', { content: content })
+		)
+	},
+
+	delete: async (commentId) =>
+	await fetchReq(`${dbUrl}/comments/${commentId}`, setOptions('DELETE')),
 
 	getRandom: {
 		id: () =>

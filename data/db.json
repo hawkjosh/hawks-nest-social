@@ -210,6 +210,12 @@
       "date": "2022-04-20T14:29:03.177Z",
       "content": "Our greatest glory is not in never failing but rising everytime we fall.",
       "userId": "436f8e67-4e82-424c-a4dd-60ac7e6aa463"
+    },
+    {
+      "id": "0377f83f-6c99-49ce-a634-7a9995ab3bdb",
+      "date": "2023-12-21T16:51:21.725Z",
+      "content": "new test post!!",
+      "userId": "dde6467f-558c-4fd9-bafb-d13fcec98d41"
     }
   ],
   "comments": [
@@ -240,6 +246,20 @@
       "content": "Use the auxiliary EXE monitor, then you can hack the haptic port!",
       "userId": "436f8e67-4e82-424c-a4dd-60ac7e6aa463",
       "postId": "cdcb1951-d8b6-42a8-a944-84045827313e"
+    },
+    {
+      "id": "ec1b890d-e537-4724-912f-9b5fe12baa95",
+      "date": "2023-12-21T17:36:41.794Z",
+      "content": "Totally agree...I love all kinds of movies!!",
+      "userId": "dde6467f-558c-4fd9-bafb-d13fcec98d41",
+      "postId": "9334477f-c36b-4c8c-9c9d-04d0f9a01350"
+    },
+    {
+      "id": "da55bae0-ad74-4c70-9f78-02d579a7a701",
+      "date": "2023-12-21T17:37:29.089Z",
+      "content": "Great post! Positivity is something we can all control about ourselves, and can make a huge impact on the state of the world.",
+      "userId": "dde6467f-558c-4fd9-bafb-d13fcec98d41",
+      "postId": "eb00a377-4079-448b-a6c1-c9fb1968a533"
     }
   ]
 }

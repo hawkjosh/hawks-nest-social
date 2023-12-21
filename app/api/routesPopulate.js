@@ -6,8 +6,8 @@ import {
 	randUuid,
 } from '@ngneat/falso'
 
-// const dataUrl = 'http://localhost:4000'
-const dataUrl = process.env.JSON_SERVER_URL || 'http://localhost:4000'
+// const dbUrl = 'http://localhost:4000'
+const dbUrl = process.env.DATABASE_URL || 'http://localhost:4000'
 
 const setOptions = (method, body) => {
 	return {
@@ -40,10 +40,10 @@ const Users = {
 			email: randUser().email,
 		}
 
-		return await fetchReq(`${dataUrl}/users`, setOptions('POST', newUser))
+		return await fetchReq(`${dbUrl}/users`, setOptions('POST', newUser))
 	},
 
-	getAll: async () => await fetchReq(`${dataUrl}/users`, setOptions('GET')),
+	getAll: async () => await fetchReq(`${dbUrl}/users`, setOptions('GET')),
 
 	getOne: async (query = 'id') => {
 		await Users.initialize()
@@ -57,7 +57,7 @@ const Users = {
 		}
 
 		return await fetchReq(
-			`${dataUrl}/users?${query}=${setQuery()}`,
+			`${dbUrl}/users?${query}=${setQuery()}`,
 			setOptions('GET')
 		)
 	},
@@ -94,16 +94,16 @@ const Posts = {
 			userId: Users.getRandom.id(),
 		}
 
-		return await fetchReq(`${dataUrl}/posts`, setOptions('POST', newPost))
+		return await fetchReq(`${dbUrl}/posts`, setOptions('POST', newPost))
 	},
 
-	getAll: async () => await fetchReq(`${dataUrl}/posts`, setOptions('GET')),
+	getAll: async () => await fetchReq(`${dbUrl}/posts`, setOptions('GET')),
 
 	getOne: async () => {
 		await Posts.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/posts/${Posts.getRandom.id()}`,
+			`${dbUrl}/posts/${Posts.getRandom.id()}`,
 			setOptions('GET')
 		)
 	},
@@ -112,7 +112,7 @@ const Posts = {
 		await Users.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/posts?userId=${Users.getRandom.id()}`,
+			`${dbUrl}/posts?userId=${Users.getRandom.id()}`,
 			setOptions('GET')
 		)
 	},
@@ -149,16 +149,16 @@ const Comments = {
 			postId: Posts.getRandom.id(),
 		}
 
-		return await fetchReq(`${dataUrl}/comments`, setOptions('POST', newComment))
+		return await fetchReq(`${dbUrl}/comments`, setOptions('POST', newComment))
 	},
 
-	getAll: async () => await fetchReq(`${dataUrl}/comments`, setOptions('GET')),
+	getAll: async () => await fetchReq(`${dbUrl}/comments`, setOptions('GET')),
 
 	getOne: async () => {
 		await Comments.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/comments/${Comments.getRandom.id()}`,
+			`${dbUrl}/comments/${Comments.getRandom.id()}`,
 			setOptions('GET')
 		)
 	},
@@ -167,7 +167,7 @@ const Comments = {
 		await Users.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/comments?userId=${Users.getRandom.id()}`,
+			`${dbUrl}/comments?userId=${Users.getRandom.id()}`,
 			setOptions('GET')
 		)
 	},
@@ -176,7 +176,7 @@ const Comments = {
 		await Posts.initialize()
 
 		return await fetchReq(
-			`${dataUrl}/comments?postId=${Posts.getRandom.id()}`,
+			`${dbUrl}/comments?postId=${Posts.getRandom.id()}`,
 			setOptions('GET')
 		)
 	},

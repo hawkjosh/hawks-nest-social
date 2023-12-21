@@ -5,8 +5,6 @@ import { Posts } from '../api/routes'
 import Button from '@/components/ui/Button'
 import Textarea from '@/components/ui/Textarea'
 
-import { useSession } from 'next-auth/react'
-
 const EditPostForm = ({ postId, currPostContent, closeModal }) => {
 	const router = useRouter()
 	const [postContent, setPostContent] = useState(currPostContent)
