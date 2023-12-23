@@ -4,15 +4,21 @@ import { useRouter } from 'next/navigation'
 import Button from '@/components/ui/Button'
 import Textarea from '@/components/ui/Textarea'
 
-async function editPost(id, content) {
-	await fetch(`http://localhost:4000/posts/${id}`, {
-		method: 'PATCH',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ content })
-	})
-}
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+import editPost from '@/components/HandleEditPostBtn'
+
+// async function editPost(id, content) {
+// 	await fetch(`http://localhost:4000/posts/${id}`, {
+// 		method: 'PATCH',
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		},
+// 		body: JSON.stringify({ content })
+// 	})
+// }
 
 export default function EditPostForm({ postId, currPostContent, closeModal }) {
 	const router = useRouter()

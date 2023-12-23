@@ -9,37 +9,27 @@ import EditCommentBtn from '@/components/EditCommentBtn'
 import AddCommentBtn from '@/components/AddCommentBtn'
 import { IoList } from 'react-icons/io5'
 
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
 async function getPosts() {
-	const res = await fetch(
-		'http://localhost:4000/posts?_sort=date&_order=desc',
-		{
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
+	const posts = await prisma.post.findMany({
+		orderBy: {
+			date: 'desc'
 		}
-	)
-	return await res.json()
+	})
+	return posts
 }
 
 async function getUsers() {
-	const res = await fetch('http://localhost:4000/users', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
+	const users = await prisma.user.findMany()
+	return users
 }
 
 async function getComments() {
-	const res = await fetch('http://localhost:4000/comments', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
+	const comments = await prisma.comment.findMany()
+	return comments
 }
 
 export default async function PostsList() {

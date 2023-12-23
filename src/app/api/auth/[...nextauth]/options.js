@@ -1,6 +1,6 @@
 import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
-import CredentialsProvider from 'next-auth/providers/credentials'
+// import CredentialsProvider from 'next-auth/providers/credentials'
 // // import EmailProvider from 'next-auth/providers/email'
 
 // // import { PrismaAdapter } from '@next-auth/prisma-adapter'
@@ -18,33 +18,33 @@ export const options = {
 			clientId: process.env.GOOGLE_ID,
 			clientSecret: process.env.GOOGLE_SECRET
 		}),
-		CredentialsProvider({
-			name: 'Credentials',
-			credentials: {
-				username: {
-					label: 'Username',
-					type: 'text',
-					placeholder: 'Enter your username...'
-				},
-				password: {
-					label: 'Password',
-					type: 'password',
-					placeholder: 'Enter your password...'
-				}
-			},
-			async authorize(credentials) {
-				// Docs at https://next-auth.js.org/configuration/providers/credentials
-				const user = { id: '1', name: 'admin', password: 'password' }
-				if (
-					credentials.username === user.name &&
-					credentials.password === user.password
-				) {
-					return user
-				} else {
-					return null
-				}
-			}
-		})
+		// CredentialsProvider({
+		// 	name: 'Credentials',
+		// 	credentials: {
+		// 		username: {
+		// 			label: 'Username',
+		// 			type: 'text',
+		// 			placeholder: 'Enter your username...'
+		// 		},
+		// 		password: {
+		// 			label: 'Password',
+		// 			type: 'password',
+		// 			placeholder: 'Enter your password...'
+		// 		}
+		// 	},
+		// 	async authorize(credentials) {
+		// 		// Docs at https://next-auth.js.org/configuration/providers/credentials
+		// 		const user = { name: 'admin', password: 'password' }
+		// 		if (
+		// 			credentials.username === user.name &&
+		// 			credentials.password === user.password
+		// 		) {
+		// 			return user
+		// 		} else {
+		// 			return null
+		// 		}
+		// 	}
+		// }),
 		// EmailProvider({
 		// 	server: {
 		// 		host: process.env.EMAIL_SERVER_HOST,

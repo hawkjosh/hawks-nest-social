@@ -3,34 +3,23 @@ import dayjs from 'dayjs'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 
-const getPost = async (id) => {
-	const res = await fetch(`http://localhost:4000/posts/${id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function getPost(id) {
+	const post = await prisma.post.findUnique({ where: { id } })
+	return post
 }
 
-const getUsers = async () => {
-	const res = await fetch('http://localhost:4000/users', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
+async function getUsers() {
+	const users = await prisma.user.findMany()
+	return users
 }
 
-const getComments = async (id) => {
-	const res = await fetch(`http://localhost:4000/comments?postId=${id}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
+async function getComments() {
+	const comments = await prisma.comment.findMany()
+	return comments
 }
 
 const DetailItem = ({ label, value, type = 'post' }) => {
@@ -57,15 +46,15 @@ export default async function SinglePost({ params }) {
 		postAuthorEmail: userData.find((user) => user.id === postData.userId).email
 	}
 
-	const comments = commentData.map((comment) => {
-		return {
-			...comment,
-			commentAuthor: userData.find((user) => user.id === comment.userId)
-				.username,
-			commentAuthorEmail: userData.find((user) => user.id === comment.userId)
-				.email
-		}
-	})
+	// const comments = commentData.map((comment) => {
+	// 	return {
+	// 		...comment,
+	// 		commentAuthor: userData.find((user) => user.id === comment.userId)
+	// 			.username,
+	// 		commentAuthorEmail: userData.find((user) => user.id === comment.userId)
+	// 			.email
+	// 	}
+	// })
 
 	return (
 		<Card>
@@ -84,7 +73,7 @@ export default async function SinglePost({ params }) {
 					<DetailItem label="Author Username" value={post.postAuthor} />
 					<DetailItem label="Author Email" value={post.postAuthorEmail} />
 				</div>
-				<div className="flex flex-col gap-3 ps-4">
+				{/* <div className="flex flex-col gap-3 ps-4">
 					<div className="text-xl font-semibold">Comments:</div>
 					{comments.length === 0 ? (
 						<div className="text-orange-600">No comments yet...</div>
@@ -122,7 +111,7 @@ export default async function SinglePost({ params }) {
 							))}
 						</>
 					)}
-				</div>
+				</div> */}
 				<Link href="/posts" className="mt-6 place-self-center">
 					<Button label="Back to Posts" btnStyle="btn" />
 				</Link>

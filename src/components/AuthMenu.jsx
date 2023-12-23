@@ -13,7 +13,12 @@ export default function AuthMenu() {
 	const [menuOpen, setMenuOpen] = useState(false)
 	const [modalOpen, setModalOpen] = useState(false)
 
-	const toggleMenu = () => setMenuOpen(!menuOpen)
+	// const toggleMenu = () => setMenuOpen(!menuOpen)
+
+	const toggleMenu = () => {
+		console.log(session)
+		setMenuOpen(!menuOpen)
+	}
 
 	const toggleModal = () => {
 		setMenuOpen(false)

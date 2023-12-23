@@ -54,12 +54,19 @@ export default function AddPostForm({ closeModal }) {
 
 	const handleAddPost = async () => {
 		const [{ id: existingUser }] = await getUser(session.user.email)
-		if (existingUser) {
-			await addPost(postContent, existingUser)
-		} else {
+		// if (existingUser) {
+		// 	await addPost(postContent, existingUser)
+		// } else {
+		// 	await addUser(session.user.name, session.user.email)
+		// 	const [{ id: newUser }] = await getUser(session.user.email)
+		// 	await addPost(postContent, newUser)
+		// }
+		if (!existingUser) {
 			await addUser(session.user.name, session.user.email)
 			const [{ id: newUser }] = await getUser(session.user.email)
 			await addPost(postContent, newUser)
+		} else {
+			await addPost(postContent, existingUser)
 		}
 		router.refresh()
 		setPostContent('')
