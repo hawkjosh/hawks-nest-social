@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	@apply text-gray-500 mx-4 bg-stone-100 sm:mx-8;
+}
+
+body {
+	@apply font-roboto;
+}
