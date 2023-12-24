@@ -1,24 +1,9 @@
 'use client'
+
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Button from '@/components/ui/Button'
-import Textarea from '@/components/ui/Textarea'
 
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
-
-import editPost from '@/components/HandleEditPostBtn'
-
-// async function editPost(id, content) {
-// 	await fetch(`http://localhost:4000/posts/${id}`, {
-// 		method: 'PATCH',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify({ content })
-// 	})
-// }
+import { Button, Textarea } from '@/components/uiComponents'
 
 export default function EditPostForm({ postId, currPostContent, closeModal }) {
 	const router = useRouter()
@@ -27,10 +12,14 @@ export default function EditPostForm({ postId, currPostContent, closeModal }) {
 	const handleInputChange = (e) => setPostContent(e.target.value)
 
 	const handleEditPost = async () => {
-		await editPost(postId, postContent)
-		router.refresh()
-		setPostContent('')
 		closeModal()
+		setPostContent('')
+		await fetch(`http://localhost:3000/api/posts/${postId}`, {
+			method: 'PATCH',
+			body: JSON.stringify({ content: postContent }),
+			cache: 'no-store'
+		})
+		router.refresh()
 	}
 
 	return (

@@ -1,9 +1,12 @@
 'use client'
+
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import Button from '@/components/ui/Button'
+
 import EditCommentForm from '@/components/EditCommentForm'
-import Modal from '@/components/ui/Modal'
+
+import { Button, Modal } from '@/components/uiComponents'
+
 import { IoPencil } from 'react-icons/io5'
 
 export default function EditCommentBtn({
@@ -18,7 +21,7 @@ export default function EditCommentBtn({
 
 	return (
 		<>
-			{session?.user?.email !== commentEmail ? null : (
+			{session.user.email !== commentEmail ? null : (
 				<>
 					<Button
 						label={<IoPencil />}

@@ -1,8 +1,11 @@
 'use client'
+
 import { useState } from 'react'
+
 import AddCommentForm from '@/components/AddCommentForm'
-import Button from '@/components/ui/Button'
-import Modal from '@/components/ui/Modal'
+
+import { Button, Modal } from '@/components/uiComponents'
+
 import { IoChatboxEllipsesOutline } from 'react-icons/io5'
 
 export default function AddCommentBtn({ postId }) {
@@ -12,7 +15,12 @@ export default function AddCommentBtn({ postId }) {
 
 	return (
 		<>
-			<Button label={<IoChatboxEllipsesOutline />} btnStyle="icon" onClick={toggleModal} className="hover:text-green-400" />
+			<Button
+				label={<IoChatboxEllipsesOutline />}
+				btnStyle="icon"
+				onClick={toggleModal}
+				className="hover:text-green-400"
+			/>
 			<Modal modalOpen={modalOpen} closeModal={toggleModal}>
 				<AddCommentForm postId={postId} closeModal={toggleModal} />
 			</Modal>

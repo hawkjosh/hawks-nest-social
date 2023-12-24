@@ -1,9 +1,12 @@
 'use client'
+
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+
 import EditPostForm from '@/components/EditPostForm'
-import Button from '@/components/ui/Button'
-import Modal from '@/components/ui/Modal'
+
+import { Button, Modal } from '@/components/uiComponents'
+
 import { IoPencil } from 'react-icons/io5'
 
 export default function EditPostBtn({ postId, currPostContent, postEmail }) {

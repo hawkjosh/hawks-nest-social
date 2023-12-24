@@ -1,7 +1,10 @@
 'use client'
+
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import Button from '@/components/ui/Button'
+
+import { Button } from '@/components/uiComponents'
+
 import { IoTrash } from 'react-icons/io5'
 
 export default function DeletePostBtn({ id, email }) {
@@ -9,12 +12,9 @@ export default function DeletePostBtn({ id, email }) {
 	const router = useRouter()
 
 	async function deletePost() {
-		await fetch(`http://localhost:4000/posts/${id}`, {
+		await fetch(`http://localhost:3000/api/posts/${id}`, {
 			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			cache: 'no-cache'
+			cache: 'no-store'
 		})
 		router.refresh()
 	}

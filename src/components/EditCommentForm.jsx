@@ -1,18 +1,9 @@
 'use client'
+
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import Button from '@/components/ui/Button'
-import Textarea from '@/components/ui/Textarea'
 
-async function editComment(id, content) {
-	await fetch(`http://localhost:4000/comments/${id}`, {
-		method: 'PATCH',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ content })
-	})
-}
+import { Button, Textarea } from '@/components/uiComponents'
 
 export default function EditCommentForm({
 	commentId,
@@ -25,10 +16,14 @@ export default function EditCommentForm({
 	const handleInputChange = (e) => setCommentContent(e.target.value)
 
 	const handleEditComment = async () => {
-		await editComment(commentId, commentContent)
-		router.refresh()
-		setCommentContent('')
 		closeModal()
+		setCommentContent('')
+		await fetch(`http://localhost:3000/api/comments/${commentId}`, {
+			method: 'PATCH',
+			body: JSON.stringify({ content: commentContent }),
+			cache: 'no-store'
+		})
+		router.refresh()
 	}
 
 	return (

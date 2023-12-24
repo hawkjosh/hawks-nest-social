@@ -1,26 +1,7 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import Button from '@/components/ui/Button'
-import Card from '@/components/ui/Card'
 
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
-
-async function getPost(id) {
-	const post = await prisma.post.findUnique({ where: { id } })
-	return post
-}
-
-async function getUsers() {
-	const users = await prisma.user.findMany()
-	return users
-}
-
-async function getComments() {
-	const comments = await prisma.comment.findMany()
-	return comments
-}
+import { Button, Card } from '@/components/uiComponents'
 
 const DetailItem = ({ label, value, type = 'post' }) => {
 	return (
@@ -36,9 +17,22 @@ const DetailItem = ({ label, value, type = 'post' }) => {
 }
 
 export default async function SinglePost({ params }) {
-	const postData = await getPost(params.id)
-	const commentData = await getComments(params.id)
-	const userData = await getUsers()
+	const postData = await fetch(`http://localhost:3000/api/posts/${params.id}`, {
+		method: 'GET',
+		cache: 'no-store'
+	}).then((res) => res.json())
+	const userData = await fetch('http://localhost:3000/api/users', {
+		method: 'GET',
+		cache: 'no-store'
+	}).then((res) => res.json())
+	const commentData = await fetch('http://localhost:3000/api/comments', {
+		method: 'GET',
+		cache: 'no-store'
+	}).then((res) =>
+		res
+			.json()
+			.then((data) => data.filter((comment) => comment.postId === postData.id))
+	)
 
 	const post = {
 		...postData,
@@ -46,15 +40,15 @@ export default async function SinglePost({ params }) {
 		postAuthorEmail: userData.find((user) => user.id === postData.userId).email
 	}
 
-	// const comments = commentData.map((comment) => {
-	// 	return {
-	// 		...comment,
-	// 		commentAuthor: userData.find((user) => user.id === comment.userId)
-	// 			.username,
-	// 		commentAuthorEmail: userData.find((user) => user.id === comment.userId)
-	// 			.email
-	// 	}
-	// })
+	const comments = commentData.map((comment) => {
+		return {
+			...comment,
+			commentAuthor: userData.find((user) => user.id === comment.userId)
+				.username,
+			commentAuthorEmail: userData.find((user) => user.id === comment.userId)
+				.email
+		}
+	})
 
 	return (
 		<Card>
@@ -73,7 +67,7 @@ export default async function SinglePost({ params }) {
 					<DetailItem label="Author Username" value={post.postAuthor} />
 					<DetailItem label="Author Email" value={post.postAuthorEmail} />
 				</div>
-				{/* <div className="flex flex-col gap-3 ps-4">
+				<div className="flex flex-col gap-4 ps-4">
 					<div className="text-xl font-semibold">Comments:</div>
 					{comments.length === 0 ? (
 						<div className="text-orange-600">No comments yet...</div>
@@ -111,7 +105,7 @@ export default async function SinglePost({ params }) {
 							))}
 						</>
 					)}
-				</div> */}
+				</div>
 				<Link href="/posts" className="mt-6 place-self-center">
 					<Button label="Back to Posts" btnStyle="btn" />
 				</Link>

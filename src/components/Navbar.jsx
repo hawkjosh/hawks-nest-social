@@ -1,5 +1,7 @@
 import Link from 'next/link'
+
 import AuthMenu from '@/components/AuthMenu'
+
 import { TfiComments } from 'react-icons/tfi'
 
 export default function Navbar() {

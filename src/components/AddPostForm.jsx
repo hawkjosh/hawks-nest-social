@@ -1,49 +1,11 @@
 'use client'
+
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
-import Button from '@/components/ui/Button'
-import Textarea from '@/components/ui/Textarea'
 
-async function getUser(email) {
-	const res = await fetch(`http://localhost:4000/users?email=${email}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
-}
-
-async function addUser(username, email) {
-	await fetch('http://localhost:4000/users', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			id: uuidv4(),
-			username,
-			email
-		})
-	})
-}
-
-async function addPost(content, userId) {
-	await fetch('http://localhost:4000/posts', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			id: uuidv4(),
-			date: new Date().toISOString(),
-			content,
-			userId
-		})
-	})
-}
+import { Button, Textarea } from '@/components/uiComponents'
 
 export default function AddPostForm({ closeModal }) {
 	const { data: session } = useSession()
@@ -53,24 +15,55 @@ export default function AddPostForm({ closeModal }) {
 	const handleInputChange = (e) => setPostContent(e.target.value)
 
 	const handleAddPost = async () => {
-		const [{ id: existingUser }] = await getUser(session.user.email)
-		// if (existingUser) {
-		// 	await addPost(postContent, existingUser)
-		// } else {
-		// 	await addUser(session.user.name, session.user.email)
-		// 	const [{ id: newUser }] = await getUser(session.user.email)
-		// 	await addPost(postContent, newUser)
-		// }
+		closeModal()
+		setPostContent('')
+		const { id: existingUser } = await fetch(
+			`http://localhost:3000/api/users/${session.user.email}`,
+			{
+				method: 'GET',
+				cache: 'no-store'
+			}
+		).then((res) => res.json())
 		if (!existingUser) {
-			await addUser(session.user.name, session.user.email)
-			const [{ id: newUser }] = await getUser(session.user.email)
-			await addPost(postContent, newUser)
+			await fetch('http://localhost:3000/api/users', {
+				method: 'POST',
+				body: JSON.stringify({
+					id: uuidv4(),
+					username: session.user.username,
+					email: session.user.email
+				}),
+				cache: 'no-store'
+			})
+			const { id: newUser } = await fetch(
+				`http://localhost:3000/api/users/${session.user.email}`,
+				{
+					method: 'GET',
+					cache: 'no-store'
+				}
+			).then((res) => res.json())
+			await fetch('http://localhost:3000/api/posts', {
+				method: 'POST',
+				body: JSON.stringify({
+					id: uuidv4(),
+					date: new Date().toISOString(),
+					content: postContent,
+					userId: newUser
+				}),
+				cache: 'no-store'
+			})
 		} else {
-			await addPost(postContent, existingUser)
+			await fetch('http://localhost:3000/api/posts', {
+				method: 'POST',
+				body: JSON.stringify({
+					id: uuidv4(),
+					date: new Date().toISOString(),
+					content: postContent,
+					userId: existingUser
+				}),
+				cache: 'no-store'
+			})
 		}
 		router.refresh()
-		setPostContent('')
-		closeModal()
 	}
 
 	return (

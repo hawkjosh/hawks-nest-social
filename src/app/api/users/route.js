@@ -1,62 +1,13 @@
-import { v4 as uuidv4 } from 'uuid'
+import { NextResponse } from 'next/server'
+import prisma from '@/lib/client'
 
-const dbUrl = process.env.JSON_SERVER_URL
-const usersUrl = `${dbUrl}/users`
-
-const setOptions = (method, body) => {
-	return {
-		method,
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(body) || null,
-		cache: 'no-cache'
-	}
+export async function GET(request) {
+	const users = await prisma.user.findMany()
+	return NextResponse.json(users, { status: 200 })
 }
 
-const fetchReq = async (url, options) => {
-	const response = await fetch(url, options)
-	return await response.json()
+export async function POST(request) {
+	const newUser = await request.json()
+	await prisma.user.create({ data: newUser })
+	return NextResponse.json(newUser, { status: 200 })
 }
-
-const Users = {
-	userData: null,
-
-	initialize: async () => {
-		const users = await Users.getAll()
-		Users.userData = users
-	},
-
-	add: async (username, email) => {
-		const newUser = {
-			id: uuidv4(),
-			username,
-			email
-		}
-
-		return await fetchReq(usersUrl, setOptions('POST', newUser))
-	},
-
-	getAll: async () => await fetchReq(usersUrl, setOptions('GET')),
-
-	getOne: async (query, userParam) => {
-		await Users.initialize()
-
-		return await fetchReq(
-			`${usersUrl}?${query}=${userParam}`,
-			setOptions('GET')
-		)
-	},
-
-	getRandom: {
-		id: () =>
-			Users.userData[Math.floor(Math.random() * Users.userData.length)].id,
-		username: () =>
-			Users.userData[Math.floor(Math.random() * Users.userData.length)]
-				.username,
-		email: () =>
-			Users.userData[Math.floor(Math.random() * Users.userData.length)].email
-	}
-}
-
-export default Users

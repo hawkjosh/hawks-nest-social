@@ -1,50 +1,11 @@
 'use client'
+
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { v4 as uuidv4 } from 'uuid'
-import Button from '@/components/ui/Button'
-import Textarea from '@/components/ui/Textarea'
 
-async function getUser(email) {
-	const res = await fetch(`http://localhost:4000/users?email=${email}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-	return await res.json()
-}
-
-async function addUser(username, email) {
-	await fetch('http://localhost:4000/users', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			id: uuidv4(),
-			username,
-			email
-		})
-	})
-}
-
-async function addComment(content, userId, postId) {
-	await fetch('http://localhost:4000/comments', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			id: uuidv4(),
-			date: new Date().toISOString(),
-			content,
-			userId,
-			postId
-		})
-	})
-}
+import { Button, Textarea } from '@/components/uiComponents'
 
 export default function AddCommentForm({ postId, closeModal }) {
 	const { data: session } = useSession()
@@ -54,17 +15,57 @@ export default function AddCommentForm({ postId, closeModal }) {
 	const handleInputChange = (e) => setCommentContent(e.target.value)
 
 	const handleAddComment = async () => {
-		const [{ id: existingUser }] = await getUser(session.user.email)
-		if (existingUser) {
-			await addComment(commentContent, existingUser, postId)
+		closeModal()
+		setCommentContent('')
+		const { id: existingUser } = await fetch(
+			`http://localhost:3000/api/users/${session.user.email}`,
+			{
+				method: 'GET',
+				cache: 'no-store'
+			}
+		).then((res) => res.json())
+		if (!existingUser) {
+			await fetch('http://localhost:3000/api/users', {
+				method: 'POST',
+				body: JSON.stringify({
+					id: uuidv4(),
+					username: session.user.username,
+					email: session.user.email
+				}),
+				cache: 'no-store'
+			})
+			const { id: newUser } = await fetch(
+				`http://localhost:3000/api/users/${session.user.email}`,
+				{
+					method: 'GET',
+					cache: 'no-store'
+				}
+			).then((res) => res.json())
+			await fetch('http://localhost:3000/api/comments', {
+				method: 'POST',
+				body: JSON.stringify({
+					id: uuidv4(),
+					date: new Date().toISOString(),
+					content: commentContent,
+					userId: newUser,
+					postId
+				}),
+				cache: 'no-store'
+			})
 		} else {
-			await addUser(session.user.name, session.user.email)
-			const [{ id: newUser }] = await getUser(session.user.email)
-			await addComment(commentContent, newUser, postId)
+			await fetch('http://localhost:3000/api/comments', {
+				method: 'POST',
+				body: JSON.stringify({
+					id: uuidv4(),
+					date: new Date().toISOString(),
+					content: commentContent,
+					userId: existingUser,
+					postId
+				}),
+				cache: 'no-store'
+			})
 		}
 		router.refresh()
-		setCommentContent('')
-		closeModal()
 	}
 
 	return (

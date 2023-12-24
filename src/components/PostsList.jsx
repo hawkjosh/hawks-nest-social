@@ -1,41 +1,29 @@
 import Link from 'next/link'
 import dayjs from 'dayjs'
-import Button from '@/components/ui/Button'
-import Card from '@/components/ui/Card'
+
+import AddCommentBtn from '@/components/AddCommentBtn'
 import DeletePostBtn from '@/components/DeletePostBtn'
 import DeleteCommentBtn from '@/components/DeleteCommentBtn'
 import EditPostBtn from '@/components/EditPostBtn'
 import EditCommentBtn from '@/components/EditCommentBtn'
-import AddCommentBtn from '@/components/AddCommentBtn'
+
+import { Button, Card } from '@/components/uiComponents'
+
 import { IoList } from 'react-icons/io5'
 
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
-
-async function getPosts() {
-	const posts = await prisma.post.findMany({
-		orderBy: {
-			date: 'desc'
-		}
-	})
-	return posts
-}
-
-async function getUsers() {
-	const users = await prisma.user.findMany()
-	return users
-}
-
-async function getComments() {
-	const comments = await prisma.comment.findMany()
-	return comments
-}
-
 export default async function PostsList() {
-	const postData = await getPosts()
-	const userData = await getUsers()
-	const commentData = await getComments()
+	const postData = await fetch('http://localhost:3000/api/posts', {
+		method: 'GET',
+		cache: 'no-store'
+	}).then((res) => res.json())
+	const userData = await fetch('http://localhost:3000/api/users', {
+		method: 'GET',
+		cache: 'no-store'
+	}).then((res) => res.json())
+	const commentData = await fetch('http://localhost:3000/api/comments', {
+		method: 'GET',
+		cache: 'no-store'
+	}).then((res) => res.json())
 
 	const posts = postData.map((post) => {
 		const user = userData.find((user) => user.id === post.userId)
