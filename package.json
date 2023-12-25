@@ -4,8 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "start http://localhost:3000 && next dev",
-		"server": "start http://localhost:4000 && node jsonServer.js",
-		"dev-server": "concurrently \"yarn server\" \"yarn dev\"",
+		"devPrisma": "concurrently \"yarn dev\" \"yarn prisma studio\"",
 		"build": "next build",
 		"start": "next start",
 		"prismaSeed": "node prisma/prismaSeed.js"
@@ -28,7 +27,6 @@
 		"@tailwindcss/typography": "^0.5.10",
 		"autoprefixer": "^10.0.1",
 		"concurrently": "^8.2.2",
-		"json-server": "^0.17.4",
 		"postcss": "^8",
 		"prisma": "^5.7.1",
 		"tailwind-merge": "^2.1.0",
