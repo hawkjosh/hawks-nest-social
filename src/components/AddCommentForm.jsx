@@ -30,7 +30,8 @@ export default function AddCommentForm({ postId, closeModal }) {
 				body: JSON.stringify({
 					id: uuidv4(),
 					username: session.user.username,
-					email: session.user.email
+					email: session.user.email,
+					image: session.user.image
 				}),
 				cache: 'no-store'
 			})

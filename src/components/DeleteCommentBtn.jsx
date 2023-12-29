@@ -26,7 +26,7 @@ export default function DeleteCommentBtn({ id, email }) {
 					label={<IoTrash />}
 					btnStyle="icon"
 					onClick={deleteComment}
-					className="hover:text-red-500"
+					className="text-xl text-white hover:text-red-500"
 				/>
 			)}
 		</>

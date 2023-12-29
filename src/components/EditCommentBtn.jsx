@@ -27,7 +27,7 @@ export default function EditCommentBtn({
 						label={<IoPencil />}
 						btnStyle="icon"
 						onClick={toggleModal}
-						className="hover:text-blue-500"
+						className="text-xl text-white hover:text-yellow-400"
 					/>
 					<Modal modalOpen={modalOpen} closeModal={toggleModal}>
 						<EditCommentForm

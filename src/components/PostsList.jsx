@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 
@@ -34,7 +35,8 @@ export default async function PostsList() {
 			return {
 				...comment,
 				commentAuthor: user.username,
-				commentAuthorEmail: user.email
+				commentAuthorEmail: user.email,
+				commentAuthorImage: user.image
 			}
 		})
 
@@ -42,6 +44,7 @@ export default async function PostsList() {
 			...post,
 			postAuthor: user.username,
 			postAuthorEmail: user.email,
+			postAuthorImage: user.image,
 			postComments: postComments
 		}
 	})
@@ -49,12 +52,22 @@ export default async function PostsList() {
 	return (
 		<div className="flex flex-col gap-4">
 			{posts.map((post) => (
-				<Card
-					key={post.id}
-					className="flex flex-col gap-3 bg-opacity-50 bg-slate-300"
-				>
+				<Card key={post.id} className="flex flex-col gap-3 bg-slate-300">
 					<div className="flex flex-col gap-4">
 						<div className="flex items-center gap-4">
+							{post.postAuthorImage ? (
+								<Image
+									src={post.postAuthorImage}
+									alt={post.postAuthor}
+									width={100}
+									height={100}
+									className="w-12 aspect-square"
+								/>
+							) : (
+								<div className="flex items-center justify-center w-12 aspect-square font-extrabold text-white bg-blue-600 rounded-full">
+									{post.postAuthor.slice(0, 2).toUpperCase()}
+								</div>
+							)}
 							<div className="flex flex-col flex-1 gap-2">
 								<div className="text-lg text-blue-600">{post.content}</div>
 								<div className="flex items-center gap-1 text-sm">
@@ -87,36 +100,48 @@ export default async function PostsList() {
 						</div>
 					</div>
 					{post.postComments.map((comment) => (
-						<Card
-							key={comment.id}
-							className="flex flex-col gap-4 bg-opacity-60 bg-slate-400"
-						>
-							<div className="flex items-center justify-between">
-								<div className="flex flex-col gap-1">
-									<div className="text-base text-yellow-600">
-										{comment.content}
-									</div>
-									<div className="flex items-center gap-1 text-xs">
-										<div className="text-white">Comment from</div>
-										<div className="font-bold text-yellow-400">
-											{comment.commentAuthor}
+						<Card key={comment.id} className="flex flex-col gap-3 bg-blue-500">
+							<div className="flex flex-col gap-4">
+								<div className="flex items-center gap-4">
+									{comment.commentAuthorImage ? (
+										<Image
+											src={comment.commentAuthorImage}
+											alt={comment.commentAuthor}
+											width={100}
+											height={100}
+											className="w-8 aspect-square"
+										/>
+									) : (
+										<div className="flex items-center justify-center w-8 aspect-square font-extrabold text-white bg-blue-600 rounded-full">
+											{comment.commentAuthor.slice(0, 2).toUpperCase()}
 										</div>
-										<div className="text-white">on</div>
-										<div className="font-bold text-yellow-400">
-											{dayjs(comment.date).format('ddd, M/D/YY @ h:mm A')}
+									)}
+									<div className="flex flex-col flex-1 gap-1">
+										<div className="text-base text-white">
+											{comment.content}
+										</div>
+										<div className="flex items-center gap-1 text-xs">
+											<div className="text-white">Comment from</div>
+											<div className="font-bold text-yellow-400">
+												{comment.commentAuthor}
+											</div>
+											<div className="text-white">on</div>
+											<div className="font-bold text-yellow-400">
+												{dayjs(comment.date).format('ddd, M/D/YY @ h:mm A')}
+											</div>
 										</div>
 									</div>
-								</div>
-								<div className="flex items-center gap-2">
-									<EditCommentBtn
-										commentId={comment.id}
-										currCommentContent={comment.content}
-										commentEmail={comment.commentAuthorEmail}
-									/>
-									<DeleteCommentBtn
-										id={comment.id}
-										email={comment.commentAuthorEmail}
-									/>
+									<div className="flex items-center gap-2">
+										<EditCommentBtn
+											commentId={comment.id}
+											currCommentContent={comment.content}
+											commentEmail={comment.commentAuthorEmail}
+										/>
+										<DeleteCommentBtn
+											id={comment.id}
+											email={comment.commentAuthorEmail}
+										/>
+									</div>
 								</div>
 							</div>
 						</Card>

@@ -3,12 +3,16 @@ const dbData = require('../src/data/db.json')
 const prisma = new PrismaClient()
 
 async function seed(modelName, jsonData) {
+	// Delete existing data
+	await prisma[modelName].deleteMany({})
+	
+	// Seed new data
 	for (const item of jsonData) {
 		await prisma[modelName].create({
 			data: item
 		})
 	}
-	console.log(`${modelName} data seeded! 🌱`)
+	console.log(`Existing ${modelName} data removed and new data seeded! 🌱`)
 }
 
 async function main() {
