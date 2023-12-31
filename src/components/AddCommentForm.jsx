@@ -17,55 +17,27 @@ export default function AddCommentForm({ postId, closeModal }) {
 	const handleAddComment = async () => {
 		closeModal()
 		setCommentContent('')
-		const { id: existingUser } = await fetch(
+
+		const { id: currentUserId } = await fetch(
 			`http://localhost:3000/api/users/${session.user.email}`,
 			{
 				method: 'GET',
 				cache: 'no-store'
 			}
 		).then((res) => res.json())
-		if (!existingUser) {
-			await fetch('http://localhost:3000/api/users', {
-				method: 'POST',
-				body: JSON.stringify({
-					id: uuidv4(),
-					username: session.user.username,
-					email: session.user.email,
-					image: session.user.image
-				}),
-				cache: 'no-store'
-			})
-			const { id: newUser } = await fetch(
-				`http://localhost:3000/api/users/${session.user.email}`,
-				{
-					method: 'GET',
-					cache: 'no-store'
-				}
-			).then((res) => res.json())
-			await fetch('http://localhost:3000/api/comments', {
-				method: 'POST',
-				body: JSON.stringify({
-					id: uuidv4(),
-					date: new Date().toISOString(),
-					content: commentContent,
-					userId: newUser,
-					postId
-				}),
-				cache: 'no-store'
-			})
-		} else {
-			await fetch('http://localhost:3000/api/comments', {
-				method: 'POST',
-				body: JSON.stringify({
-					id: uuidv4(),
-					date: new Date().toISOString(),
-					content: commentContent,
-					userId: existingUser,
-					postId
-				}),
-				cache: 'no-store'
-			})
-		}
+
+		await fetch('http://localhost:3000/api/comments', {
+			method: 'POST',
+			body: JSON.stringify({
+				id: uuidv4(),
+				date: new Date().toISOString(),
+				content: commentContent,
+				userId: currentUserId,
+				postId
+			}),
+			cache: 'no-store'
+		})
+
 		router.refresh()
 	}
 
